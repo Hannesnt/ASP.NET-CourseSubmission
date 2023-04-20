@@ -1,4 +1,5 @@
 
+using ASP.NET_Course_Submission.Helpers.Repositories.ContextRepos;
 using ASP.NET_Course_Submission.Helpers.Repositories.IdentityRepos;
 using ASP.NET_Course_Submission.Helpers.Services;
 using ASP.NET_Course_Submission.Models.Context;
@@ -23,6 +24,9 @@ builder.Services.AddScoped<ProfileRepository>();
 builder.Services.AddScoped<AuthService>();
 builder.Services.AddScoped<UserService>();
 builder.Services.AddScoped<SeedService>();
+builder.Services.AddScoped<ContactMessageRepository>();
+builder.Services.AddScoped<ContactUserRepository>();
+builder.Services.AddScoped<ContactUsService>();
 
 var app = builder.Build();
 app.UseHsts();

@@ -1,0 +1,9 @@
+﻿@model List<ProfileViewModel>
+@{
+	ViewData["Title"] = "All users";
+}
+
+@foreach(var user in Model){
+	<h1>@user.FirstName @user.LastName @user.RoleName[0]</h1>
+	
+}

@@ -12,7 +12,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Helpers\Repositories\ContextRepos\" />
     <Folder Include="Views\Partials\Cards\" />
   </ItemGroup>
 
