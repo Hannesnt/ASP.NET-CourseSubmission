@@ -1,0 +1,22 @@
+@import '../core/fonts';
+@import '../core/colors';
+@import '../core/mixins';
+.smallimg {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: 5vh 0px;
+    .smallimgCard {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 10px;
+        max-width: 50%;
+        img{
+            max-width: 90%;
+        }
+      }
+
+  }
+  
+  

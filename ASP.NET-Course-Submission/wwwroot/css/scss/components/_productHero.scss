@@ -1,0 +1,16 @@
+.hero{
+    display: none;
+    img{
+        
+        @include lg{
+            width: 100%;
+            height: auto;
+            margin-bottom: 4rem;
+
+        }
+    }
+    @include lg{
+        display: block;
+    }
+}
+

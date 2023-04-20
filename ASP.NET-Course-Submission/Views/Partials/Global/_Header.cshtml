@@ -1,5 +1,39 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿
+<header>
+    <div class="container">
+        <div class="logo">
+            <a asp-controller="home" asp-action="index">
+                <img src="/images/logo.svg" alt="bmerketo">
+            </a>
+        </div>
+        <nav id="menu" class="menu-links">
+            <a class="link" asp-controller="home" asp-action="index">HOME</a>
+            <a class="link" asp-controller="products" asp-action="index">PRODUCTS</a>
+            <a class="link" asp-controller="contacts" asp-action="index">CONTACT</a>
+            @if (signInManager.IsSignedIn(User) && User.IsInRole("admin"))
+            {
+                <a asp-action="Index" asp-controller="Admin" class="m-4">ADMIN</a>
+            }
+        </nav>
+        <nav class="menu-icons">
+            @if (signInManager.IsSignedIn(User))
+            {
+                <a asp-action="Index" asp-controller="Account">@User.FindFirst("DisplayName")?.Value</a>
+                <a class="link" asp-controller="logout" asp-action="SignOut">Logout</a>
+            }
+            else
+            {
+                <a asp-action="Index" asp-controller="Register" class="m-2 link">REGISTER</a>
+                <a asp-action="SignIn" asp-controller="Login" class="m-2 link">LOGIN</a>
+            }
+            <a class="link" asp-controller="products" asp-action="search"><i class="fa-regular fa-search"></i></a>
+            <a class="link" asp-controller="shopping" asp-action="index"><i class="fa-solid fa-cart-shopping"></i></a>
+        </nav>
+        <div class="toggle">
+            <button class="btn-toggle btn-outline-white" data-option="toggle" data-target="#menu">
+                <i id="icon" class="fa-regular fa-bars"></i>
+            </button>
+        </div>
+    </div>
+</header>
+<script>toggleMenuButton('[data-option="toggle"]')</script>

@@ -1,0 +1,120 @@
+@import '../core/fonts';
+@import '../core/colors';
+@import '../core/mixins';
+
+.products {
+    background-color: $color-white;
+
+    .container {
+        color: $color-dark-2;
+        font-family: $font-poppins;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        h2 {
+            margin: 30px 20px
+        }
+
+        .title {
+            text-align: center;
+            font-size: 40px;
+            font-weight: $font-weight-bold;
+            line-height: 1.2;
+            margin-top: 20px;
+            margin-bottom: 20px;
+
+            @include lg {
+                font-size: 50px;
+                margin-bottom: 50px;
+                margin-top: 40px;
+            }
+        }
+
+        .categories {
+            margin-bottom: 30px;
+            width: 100%;
+            text-align: center;
+
+            .breadcrumb {
+                margin: 0 auto;
+                width: 100%;
+                display: flex;
+                justify-content: center;
+
+                @include lg {
+                    width: 100%;
+                    justify-content: center;
+                }
+
+                a {
+                    color: $color-dark-3;
+                }
+
+                li {
+                    a {
+                        color: $color-dark-3;
+                        &:hover{
+                            text-decoration: underline !important;
+                        }
+                    }
+                    
+                }
+
+                li + li:before {
+                    padding: 8px;
+                    content: "/\00a0";
+                }
+            }
+        }
+
+        .product-cards {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+
+            @include lg {
+                display: flex;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+
+            .product-card {
+                margin: 30px 20px;
+
+                @include lg {
+                }
+
+                .product-card-img {
+                }
+
+                .product-card-title {
+                    color: $color-dark-1;
+                    display: block;
+                    text-align: left;
+
+                    @include lg {
+                        display: block;
+                        text-align: left;
+                    }
+                }
+
+                .product-card-price {
+                    color: $color-dark-3;
+                    float: left;
+
+                    @include lg {
+                    }
+                }
+
+                .product-card-cart {
+                    font-size: 15px;
+                    float: right;
+
+                    @include lg {
+                    }
+                }
+            }
+        }
+    }
+}

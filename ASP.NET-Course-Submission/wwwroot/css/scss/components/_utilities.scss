@@ -1,0 +1,130 @@
+@import '../core/fonts';
+@import '../core/colors';
+@import '../core/mixins';
+
+html, body{
+    font-size: 16px;
+    font-family: $font-roboto;
+    font-weight: $font-weight-regular;
+    color: $color-dark-3;
+
+}
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+.open-menu {
+    width: 100vw !important;
+    opacity: 0.99;
+    transform: translateX(-100%);
+}
+a{
+    text-decoration: none;
+    color: $color-dark-1;
+
+    &:hover{
+        text-decoration: underline;
+        color: $color-dark-1;
+    }
+}
+
+button{
+    padding: 10px 35px;
+    font-family: $font-poppins;
+    border: 1px solid $color-dark-1;
+    background-color: transparent;
+    color: $color-dark-1;
+    transition: all 0.2s;
+    &:hover{
+        background-color: $color-dark-1;
+        color: $color-white;
+    }
+}
+.btn-white{
+    border: none;
+    background-color: $color-white;
+    color: $color-dark-2;
+    border: 1px solid $color-dark-2;
+}
+.btn-theme {
+    border: none;
+    background-color: $color-theme-1;
+    color: $color-white;
+    text-decoration: none;
+    cursor: pointer;
+    padding: 10px 35px;
+    &:hover {
+        background-color: $color-dark-1;
+        color: $color-white;
+    }
+}
+
+.contactBanner {
+    img {
+        width: 100%;
+        height: auto;
+    }
+}
+
+    .Forms {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    a {
+        float: right;
+        color: $color-theme-1;
+    }
+
+input {
+    width: 100%;
+    height: 50px;
+    font-size: 20px;
+    border: 0;
+    background-color: rgb(252, 250, 250);
+}
+
+    .checkbox {
+        width: auto;
+        height: auto;
+        margin: 50px 0;
+    }
+
+button {
+    background-color: $color-theme-1 !important;
+    border: 0 !important;
+    color: white !important;
+}
+
+    span a {
+        float: right;
+        color: $color-theme-1 !important;
+        text-decoration: none;
+    }
+
+    .col-12 {
+        margin: 20px 0;
+    }
+
+    textarea {
+        border: 0;
+        background-color: rgb(252, 250, 250);
+    }
+footer {
+    display: none;
+    @include lg {
+        background-color: $color-dark-1;
+        height: 120px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: $color-dark-4;
+        margin-top: auto;
+
+        p {
+            margin: 0;
+        }
+    }
+}

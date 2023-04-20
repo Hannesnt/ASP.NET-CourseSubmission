@@ -1,0 +1,59 @@
+.newsletter{
+    background-color: $color-dark-4;
+    padding: 50px 100px;
+    display: flex;
+    justify-content: center;
+
+    @include lg{
+        padding: 90px 150px;
+    }
+    .content{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        padding: 50px 70px;
+        width: 100%;
+        @include md{
+            background-color: $color-white;
+        }
+        @include lg{
+            height: 20vh;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+        }
+        input{
+            font-size: 13px;
+            height: 45.6px;
+            width: 246.45px;
+            text-align: center;
+            border-radius: 20px;
+            border: 1px solid lightgray;
+            @include lg{
+                width: 70%;
+                text-align:left;
+            }
+            
+        }
+        ::placeholder{
+            padding-left: 20px;
+        }
+        button{
+            font-size: 13px;
+            margin-top: 10px;
+            border-radius: 20px;
+            width: 246.45px;
+            padding: 13px 35px;
+            background-color: $color-theme-1;
+            color: $color-white;
+            border: $color-theme-1;
+            @include lg{
+                margin-top: 0;
+                position: absolute;
+                right: 20vw;
+                height: 45.6px;
+            }
+        }
+    }
+}
