@@ -20,7 +20,7 @@ namespace ASP.NET_Course_Submission.Helpers.Services
             _userManager = userManager;
             _profileRepository = profileRepository;
         }
-        public async Task<IEnumerable<ProfileViewModel>> Getroles()
+        public async Task<IEnumerable<ProfileViewModel>> GetUserAsync()
         {
             var UserRoles = new List <ProfileViewModel>();
 
@@ -34,12 +34,13 @@ namespace ASP.NET_Course_Submission.Helpers.Services
 
                 var userWithRole = new ProfileViewModel
                 {
+                    Id = userProfile.Id,
                     FirstName = userProfile.FirstName,
                     LastName = userProfile.LastName,
                     PhoneNumber = userProfile.PhoneNumber,
                     ProfileImage = userProfile.ProfileImage,
                     CompanyName = userProfile.CompanyName,
-                    RoleName = roles
+                    RoleName = roles[0],
                 };
                 UserRoles.Add(userWithRole);
             }
@@ -47,5 +48,19 @@ namespace ASP.NET_Course_Submission.Helpers.Services
             return UserRoles;
 
         }
-    }
+		public async Task<IEnumerable<RoleViewModel>> GetRolesAsync()
+		{
+			var roles = new List<RoleViewModel>();
+			var items = await _identityContext.Roles.ToListAsync();
+			foreach (var role in items)
+			{
+				roles.Add(new RoleViewModel
+				{
+					Id = role.Id,
+					Name = role.Name!
+				});
+			}
+			return roles;
+		}
+	}
 }

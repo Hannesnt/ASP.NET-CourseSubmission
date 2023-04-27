@@ -1,0 +1,67 @@
+﻿@using ASP.NET_Course_Submission.Helpers.Services;
+
+@model RegisterProductViewModel
+@inject CategoryService categoryService
+@{
+	var categories = await categoryService.GetAllCategoriesAsync();
+}
+<section class="Forms">
+	<div class="container">
+		<div class="row d-flex justify-content-center">
+			<div class="col-6">
+				<form method="post" novalidate>
+					<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+					<div class="mb-3">
+						<label asp-for="Name" class="form-label"></label>
+						<input asp-for="Name" class="form-control" />
+						<small><span asp-validation-for="Name" class="text-danger"></span></small>
+					</div>
+					<div class="mb-3">
+						<label asp-for="Price" class="form-label"></label>
+						<input asp-for="Price" class="form-control" />
+						<small><span asp-validation-for="Price" class="text-danger"></span></small>
+					</div>
+					<div class="mb-3">
+						<label asp-for="Description" class="form-label"></label>
+						<textarea asp-for="Description" class="form-control" rows="4"></textarea>
+						<small><span asp-validation-for="Description" class="text-danger"></span></small>
+					</div>
+					<div class="mb-3">
+						<label asp-for="ProductImage" class="form-label"></label>
+						<input asp-for="ProductImage" class="form-control" />
+						<small><span asp-validation-for="ProductImage" class="text-danger"></span></small>
+					</div>
+					<div class="mb-3">
+						<div class="tags">
+							<label class="me-1">New</label>
+							<input class="checkbox m-0" type="checkbox" asp-for="New" />
+						</div>
+						<div class="tags">
+							<label class="me-1">Featured</label>
+							<input class="checkbox  m-0" type="checkbox" asp-for="Featured" />
+						</div>
+						<div class="tags">
+							<label class="me-1">Popular</label>
+							<input class="checkbox  m-0" type="checkbox" asp-for="Popular" />
+						</div>
+					</div>
+					<div class="mb-3">
+						<label asp-for="CategoryId" class="form-label"></label>
+						<select asp-for="CategoryId" class="form-control">
+							<option value="">--Select a category--</option>
+							@foreach (var item in categories)
+							{
+								<option value=@item.Id>@item.CategoryName</option>
+							}
+						</select>
+						<small><span asp-validation-for="CategoryId" class="text-danger"></span></small>
+					</div>
+
+					<div class="mt-2">
+						<button type="submit" class="btn btn-success">Skapa annons</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</section>

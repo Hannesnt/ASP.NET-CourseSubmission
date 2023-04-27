@@ -1,0 +1,22 @@
+﻿@using ASP.NET_Course_Submission.Helpers.Services;
+@model ProfileViewModel
+@inject UserService _userService
+@{
+	ViewData["Title"] = "All users";
+	var roles = await _userService.GetRolesAsync();
+}
+
+<h4>@Model.FirstName @Model.LastName @Model.RoleName</h4>
+<h5>Edit role of @Model.FirstName </h5>
+<form method="post">
+	<input type="hidden" asp-for="@Model.Id"/> 
+	<select asp-for="@Model.RoleName" class="form-control">
+		<option value="">--Select a category--</option>
+		@foreach (var item in roles)
+		{
+			<option value=@item.Name>@item.Name</option>
+		}
+
+	</select>
+	<button type="submit">Update role</button>
+</form> 

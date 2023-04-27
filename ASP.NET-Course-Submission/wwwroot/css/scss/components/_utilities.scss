@@ -112,8 +112,12 @@ button {
         border: 0;
         background-color: rgb(252, 250, 250);
     }
+.tags {
+    display: block;
+}
 footer {
     display: none;
+
     @include lg {
         background-color: $color-dark-1;
         height: 120px;

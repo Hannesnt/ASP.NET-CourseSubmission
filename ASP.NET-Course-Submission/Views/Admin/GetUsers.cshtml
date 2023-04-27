@@ -1,9 +1,11 @@
-﻿@model List<ProfileViewModel>
+﻿@using ASP.NET_Course_Submission.Helpers.Services;
+@model List<ProfileViewModel>
+@inject UserService _userService
 @{
 	ViewData["Title"] = "All users";
+	var roles = await _userService.GetRolesAsync();
 }
 
 @foreach(var user in Model){
-	<h1>@user.FirstName @user.LastName @user.RoleName[0]</h1>
-	
+	<partial name ="/Views/Partials/Admin/_ShowUsers.cshtml" model="user"/>
 }

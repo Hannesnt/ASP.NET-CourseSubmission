@@ -26,7 +26,12 @@ builder.Services.AddScoped<UserService>();
 builder.Services.AddScoped<SeedService>();
 builder.Services.AddScoped<ContactMessageRepository>();
 builder.Services.AddScoped<ContactUserRepository>();
+builder.Services.AddScoped<ProductRepository>();
 builder.Services.AddScoped<ContactUsService>();
+builder.Services.AddScoped<AdminService>();
+builder.Services.AddScoped<AdminRepository>();
+builder.Services.AddScoped<CategoryService>();
+builder.Services.AddScoped<ProductService>();
 
 var app = builder.Build();
 app.UseHsts();

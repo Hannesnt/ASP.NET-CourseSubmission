@@ -17,18 +17,20 @@ namespace ASP.NET_Course_Submission.Helpers.Services
 		private readonly UserManager<IdentityUser> _userManager;
 		private readonly SignInManager<IdentityUser> _signInManager;
         private readonly SeedService _seedService;
-        public AuthService(AddressRepository addressRepository, ProfileRepository profileRepository, IdentityContext identityContext, UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, SeedService seedService)
-        {
-            _addressRepository = addressRepository;
-            _profileRepository = profileRepository;
-            _identityContext = identityContext;
-            _userManager = userManager;
-            _signInManager = signInManager;
-            _seedService = seedService;
-        }
+		private readonly RoleManager<IdentityRole> _roleManager;
+		public AuthService(AddressRepository addressRepository, ProfileRepository profileRepository, IdentityContext identityContext, UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, SeedService seedService, RoleManager<IdentityRole> roleManager)
+		{
+			_addressRepository = addressRepository;
+			_profileRepository = profileRepository;
+			_identityContext = identityContext;
+			_userManager = userManager;
+			_signInManager = signInManager;
+			_seedService = seedService;
+			_roleManager = roleManager;
+		}
 
 
-        public async Task<bool> RegisterAsync(RegisterViewModel model)
+		public async Task<bool> RegisterAsync(RegisterViewModel model)
 		{
 			try
 			{
@@ -103,5 +105,6 @@ namespace ASP.NET_Course_Submission.Helpers.Services
 
 
         }
+
     }
 }

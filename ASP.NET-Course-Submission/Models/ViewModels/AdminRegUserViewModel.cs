@@ -1,11 +1,12 @@
-﻿using System.ComponentModel.DataAnnotations;
-using ASP.NET_Course_Submission.Models.Entities;
+﻿using ASP.NET_Course_Submission.Models.Entities;
 using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations;
 
 namespace ASP.NET_Course_Submission.Models.ViewModels
 {
-	public class RegisterViewModel
+	public class AdminRegUserViewModel
 	{
+
 		[Required(ErrorMessage = "Du måste ange ett förnamn")]
 		[RegularExpression(@"^[a-öA-Ö]+(?:[ é'-][a-öA-Ö]+)*$", ErrorMessage = "Du måste ange ett giltig förnamn")]
 		[Display(Name = "Förnamn*")]
@@ -52,7 +53,11 @@ namespace ASP.NET_Course_Submission.Models.ViewModels
 		[Display(Name = "Profilbild (Valfritt)")]
 		public string? ProfileImage { get; set; }
 
-		public static implicit operator ProfileEntity(RegisterViewModel registerViewModel)
+		[Required(ErrorMessage = "Du måste ange användarens roll")]
+		[Display(Name = "AnvändarRoll * ")]
+		public string Role { get; set; } = null!;
+
+		public static implicit operator ProfileEntity(AdminRegUserViewModel registerViewModel)
 		{
 			return new ProfileEntity
 			{
@@ -62,8 +67,8 @@ namespace ASP.NET_Course_Submission.Models.ViewModels
 				PhoneNumber = registerViewModel.Phone,
 				CompanyName = registerViewModel.Company,
 			};
-		} 
-		public static implicit operator AddressEntity(RegisterViewModel registerViewModel)
+		}
+		public static implicit operator AddressEntity(AdminRegUserViewModel registerViewModel)
 		{
 			return new AddressEntity
 			{
@@ -72,13 +77,26 @@ namespace ASP.NET_Course_Submission.Models.ViewModels
 				City = registerViewModel.City,
 			};
 		}
-		public static implicit operator IdentityUser(RegisterViewModel registerViewModel)
+		public static implicit operator IdentityUser(AdminRegUserViewModel registerViewModel)
 		{
 			return new IdentityUser
 			{
 				UserName = registerViewModel.Email,
 				PhoneNumber = registerViewModel.Phone,
 				Email = registerViewModel.Email,
+			};
+		}
+		public static implicit operator ProfileViewModel(AdminRegUserViewModel registerViewModel)
+		{
+			var roleList = new List<string>() { registerViewModel.Role };
+			return new ProfileViewModel
+			{
+				FirstName = registerViewModel.FirstName,
+				LastName = registerViewModel.LastName,
+				ProfileImage = registerViewModel.ProfileImage,
+				PhoneNumber = registerViewModel.Phone,
+				CompanyName = registerViewModel.Company,
+				RoleName = roleList[0],
 			};
 		}
 	}

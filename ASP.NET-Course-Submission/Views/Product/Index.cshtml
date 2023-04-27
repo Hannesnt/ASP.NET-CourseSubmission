@@ -1,0 +1,49 @@
+﻿@inject ProductService productService
+@inject CategoryService categoryService
+@model List<ProductViewModel>
+@{
+	ViewData["Title"] = "Produkter";
+
+	var products = await productService.GetAllAsync();
+	var categories = await categoryService.GetAllCategoriesAsync();
+
+}
+<div class="container">
+	<div class="row justify-content-center">
+
+		<div class="categories">
+			@if (categories != null)
+			{
+				<ul class="breadcrumb text-align-center justify-content-center">
+					<li><a asp-controller="products" asp-action="index">All</a></li>
+					@foreach (var category in categories)
+					{
+						<li><a asp-controller="products" asp-action="index" asp-route-search="@category.CategoryName" class="m-2">@category.CategoryName</a></li>
+					}
+				</ul>
+			}
+		</div>
+	</div>
+</div>
+
+<div class="container">
+	<div class="row justify-content-center">
+		@if (Model.Any())
+		{
+			foreach (var product in Model)
+			{
+				<div class="mb-3 mt-3 col-3 text-center">
+					<img src="/images/placeholders/200x122.svg" />
+					<div>@product.Name</div>
+					<div>$@string.Format("{0:F0}", product.Price)</div>
+					<div>@product.Description</div>
+				</div>
+			}
+		}
+		else
+		{
+			<p>Finns inga produkter tillhörande denna kategori</p>
+		}
+
+	</div>
+</div>

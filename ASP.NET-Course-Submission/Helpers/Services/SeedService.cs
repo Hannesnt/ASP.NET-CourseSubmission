@@ -17,6 +17,7 @@ namespace ASP.NET_Course_Submission.Helpers.Services
 
             if (!await _roleManager.RoleExistsAsync("user"))
                 await _roleManager.CreateAsync(new IdentityRole("user"));
+
         }
     }
 }
