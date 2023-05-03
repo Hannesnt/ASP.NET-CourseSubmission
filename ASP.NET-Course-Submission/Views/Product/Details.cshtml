@@ -1,0 +1,128 @@
+﻿@model ProductViewModel;
+@{
+    ViewData["Title"] = Model.Name;
+    var related = await productRepository.GetAllAsync(x => x.CategoryId == Model.CategoryId);
+    var categoryName = await categoryService.GetAsync(Model.CategoryId);
+}
+
+<div class="hero">
+    <img src="images/placeholders/1920x300.svg" alt="">
+</div>
+<section class="productSection">
+    <div class="productImages">
+        <img src="@Model.ProductImage" alt="">
+    </div>
+    <div class="productInformation">
+        <div class="reviewDiv">
+            <i class="fa-solid fa-star" style="color: #f2c41c;"></i>
+            <i class="fa-solid fa-star" style="color: #f2c41c;"></i>
+            <i class="fa-solid fa-star" style="color: #f2c41c;"></i>
+            <i class="fa-solid fa-star" style="color: #f2c41c;"></i>
+            <i class="fa-solid fa-star" style="color: #f2c41c;"></i>
+            <span>16 Reviews</span>
+        </div>
+        <p class="price">$@string.Format("{0:F0}", Model.Price)</</p>
+        <div class="Cart">
+
+            <div class="QuantityBtns">
+                <div><p>-</p></div>
+                <div><p>2</p></div>
+                <div><p>+</p></div>
+            </div>
+            <button>Add to cart</button>
+        </div>
+        <div class="colors">
+            <div>
+                <i class="fa-solid fa-circle" style="color: #f70202;"></i>
+                <i class="fa-solid fa-circle" style="color: #f7c202;"></i>
+                <i class="fa-solid fa-circle" style="color: #85bbd5;"></i>
+            </div>
+            <p>SKU: N/A</p>
+        </div>
+        <div class="wishlist">
+            <button class="wishlistBtn">Add to wishlist</button>
+            <p>Category: @categoryName.CategoryName</p>
+        </div>
+        <hr class="mobileHr" />
+        <div class="info">
+            <p>@Model.Name</p>
+            <p>@Model.Description</p>
+        </div>
+    </div>
+</section>
+<section class="moreInfo">
+    <div class="infoBtns">
+        <button>DESCRIPTION</button>
+        <button>ADDITIONAL INFO</button>
+        <button>REVIEWS (0)</button>
+        <button>SHIPPING & DELIVERY</button>
+    </div>
+    <div class="additionalInfo">
+        <div>
+           <p>@Model.Description</p>
+        </div>
+        <div>
+            <img src="images/placeholders/469x356.svg" alt="">
+        </div>
+    </div>
+    <hr>
+</section>
+<section class="products">
+    <div class="container">
+        <h2>Related Products</h2>
+        <div class="product-cards">
+            @foreach(var product in related)
+            {
+                if(product.Id != Model.Id)
+                {
+                    <a asp-controller="product" asp-action="Details" asp-route-id="@product.Id" > 
+                        <div class="product-card">
+                            <img class="product-card-img" src="@product.ProductImage" alt="@product.Name" width="270px" height="295px" />
+                            <span class="product-card-title">@product.Name</span>
+                            <span class="product-card-price">$@string.Format("{0:F0}", product.Price)</span>
+                            <span class="product-card-cart"><i class="fa-solid fa-cart-shopping"></i></span>
+                        </div>
+                    </a>
+                }
+
+            }
+
+           @* <div class="product-card">
+                <img class="product-card-img" src="images/placeholders/270x295.svg" alt="" />
+                <span class="product-card-title">Apple Watch Series</span>
+                <span class="product-card-price">$30.00</span>
+                <span class="product-card-cart"><i class="fa-solid fa-cart-shopping"></i></span>
+            </div>
+            <div class="product-card">
+                <img class="product-card-img" src="images/placeholders/270x295.svg" alt="" />
+                <span class="product-card-title">Apple Watch Series</span>
+                <span class="product-card-price">$30.00</span>
+                <span class="product-card-cart"><i class="fa-solid fa-cart-shopping"></i></span>
+            </div>
+            <div class="product-card">
+                <img class="product-card-img" src="images/placeholders/270x295.svg" alt="" />
+                <span class="product-card-title">Apple Watch Series</span>
+                <span class="product-card-price">$30.00</span>
+                <span class="product-card-cart"><i class="fa-solid fa-cart-shopping"></i></span>
+            </div> *@
+        </div>
+    </div>
+</section>
+    <section class="smallimg">
+        <div class="smallimgCard">
+            <img src="images/placeholders/200x122.svg" alt="">
+        </div>
+        <div class="smallimgCard">
+            <img src="images/placeholders/200x122.svg" alt="">
+        </div>
+        <div class="smallimgCard">
+            <img src="images/placeholders/200x122.svg" alt="">
+        </div>
+        <div class="smallimgCard">
+            <img src="images/placeholders/200x122.svg" alt="">
+        </div>
+        <div class="smallimgCard">
+            <img src="images/placeholders/200x122.svg" alt="">
+        </div>
+    </section>
+ 

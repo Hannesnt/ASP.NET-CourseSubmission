@@ -27,5 +27,19 @@ namespace ASP.NET_Course_Submission.Helpers.Services
 			}
 			return categories;
 		}
+		public async Task<CategoryViewModel> GetAsync(int id)
+		{
+			var item = await _context.Categories.FirstOrDefaultAsync(x => x.Id == id);
+			return item!;
+
+        }
+		public async Task<string> GetCategoryName(int id)
+		{
+			var name = "";
+			var item = await _context.Categories.FirstOrDefaultAsync(x => x.Id == id);
+			name = item?.CategoryName;
+			return name!;
+
+		}
 	}
 }

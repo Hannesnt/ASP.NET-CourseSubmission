@@ -15,10 +15,10 @@
 			@if (categories != null)
 			{
 				<ul class="breadcrumb text-align-center justify-content-center">
-					<li><a asp-controller="products" asp-action="index">All</a></li>
+					<li><a asp-controller="product" asp-action="index" class="m-2">All</a></li>
 					@foreach (var category in categories)
 					{
-						<li><a asp-controller="products" asp-action="index" asp-route-search="@category.CategoryName" class="m-2">@category.CategoryName</a></li>
+						<li><a asp-controller="product" asp-action="index" asp-route-search="@category.CategoryName" class="m-2">@category.CategoryName</a></li>
 					}
 				</ul>
 			}
@@ -32,11 +32,13 @@
 		{
 			foreach (var product in Model)
 			{
-				<div class="mb-3 mt-3 col-3 text-center">
-					<img src="/images/placeholders/200x122.svg" />
-					<div>@product.Name</div>
-					<div>$@string.Format("{0:F0}", product.Price)</div>
-					<div>@product.Description</div>
+				<div class="mb-3 mt-3 col-3 text-center d-flex justify-content-center">
+					<a asp-controller="product" asp-action="Details" asp-route-id="@product.Id" >
+						<img src="/images/placeholders/200x122.svg" />
+						<div>@product.Name</div>
+						<div>$@string.Format("{0:F0}", product.Price)</div>
+						<div>@product.Description</div>
+					</a>
 				</div>
 			}
 		}

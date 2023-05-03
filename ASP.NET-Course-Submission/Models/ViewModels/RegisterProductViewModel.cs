@@ -30,8 +30,11 @@ namespace ASP.NET_Course_Submission.Models.ViewModels
 		public bool New { get; set; }
 		public bool Featured { get; set; }
 		public bool Popular { get; set; }
+        public bool OnSale { get; set; }
+		
+		public int Discount { get; set; }
 
-		public static implicit operator ProductEntity(RegisterProductViewModel RegisterProductViewModel)
+        public static implicit operator ProductEntity(RegisterProductViewModel RegisterProductViewModel)
 		{
 			return new ProductEntity
 			{
@@ -43,6 +46,8 @@ namespace ASP.NET_Course_Submission.Models.ViewModels
 				New = RegisterProductViewModel.New,
 				Featured = RegisterProductViewModel.Featured,
 				Popular = RegisterProductViewModel.Popular,
+				OnSale = RegisterProductViewModel.OnSale,
+				Discount = RegisterProductViewModel.Discount,
 			};
 		}
 	}

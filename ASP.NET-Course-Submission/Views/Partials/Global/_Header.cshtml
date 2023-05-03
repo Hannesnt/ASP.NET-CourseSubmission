@@ -18,7 +18,7 @@
         <nav class="menu-icons">
             @if (signInManager.IsSignedIn(User))
             {
-                <a class="link" asp-action="Index" asp-controller="Account">@User.FindFirst("DisplayName")?.Value</a>
+                <a class="link" asp-action="index" asp-controller="user">@User.FindFirst("DisplayName")?.Value</a>
                 <a class="link" asp-controller="logout" asp-action="SignOut">Logout</a>
             }
             else

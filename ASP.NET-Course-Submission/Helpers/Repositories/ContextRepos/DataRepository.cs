@@ -50,5 +50,15 @@ namespace ASP.NET_Course_Submission.Helpers.Repositories.ContextRepos
 
             return false;
         }
-    }
+		public virtual async Task<ICollection<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>> predicate)
+		{
+			var entity = await _context.Set<TEntity>().Where(predicate).ToListAsync();
+			return entity!;
+		}
+		public virtual async Task<ICollection<TEntity>> GetAllAsync()
+		{
+			var entity = await _context.Set<TEntity>().ToListAsync();
+			return entity!;
+		}
+	}
 }

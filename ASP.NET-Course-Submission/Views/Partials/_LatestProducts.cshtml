@@ -1,0 +1,29 @@
+﻿@model List<ProductViewModel>
+@inject ProductService productService
+@{
+	var products = await productService.DiscoverProductsAsync();
+	
+}
+
+@if (products != null)
+{
+	<div class="container">
+		<div class="row">
+			<div class="col-12 d-flex justify-content-center flex-column">
+				<div class="col-6">
+					<h2>Discover The Latest Products From @products[0].CategoryName</h2>
+				</div>
+				<div class="col-6">
+					@foreach (var product in products)
+					{
+						<div class="col-12">
+							<partial name="/Views/Partials/Cards/_ProductCard.cshtml" model="product" />
+						</div>
+					}
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+}

@@ -1,4 +1,5 @@
-﻿using ASP.NET_Course_Submission.Helpers.Repositories.ContextRepos;
+﻿using System.Security.Claims;
+using ASP.NET_Course_Submission.Helpers.Repositories.ContextRepos;
 using ASP.NET_Course_Submission.Helpers.Repositories.IdentityRepos;
 using ASP.NET_Course_Submission.Models.Context;
 using ASP.NET_Course_Submission.Models.Entities;
@@ -14,11 +15,15 @@ namespace ASP.NET_Course_Submission.Helpers.Services
         private readonly IdentityContext _identityContext;
         private readonly UserManager<IdentityUser> _userManager;
         private readonly ProfileRepository _profileRepository;
-        public UserService(IdentityContext identityContext, UserManager<IdentityUser> userManager, ProfileRepository profileRepository)
+        private readonly AddressRepository _addressRepository;
+        private readonly ProfileAddressRepository _profileAddressRepository;
+        public UserService(IdentityContext identityContext, UserManager<IdentityUser> userManager, ProfileRepository profileRepository, AddressRepository addressRepository, ProfileAddressRepository profileAddressRepository)
         {
             _identityContext = identityContext;
             _userManager = userManager;
             _profileRepository = profileRepository;
+            _addressRepository = addressRepository;
+            _profileAddressRepository = profileAddressRepository;
         }
         public async Task<IEnumerable<ProfileViewModel>> GetUserAsync()
         {
@@ -62,5 +67,44 @@ namespace ASP.NET_Course_Submission.Helpers.Services
 			}
 			return roles;
 		}
+        public async Task<CurrentUserViewModel> CurrentUser(ClaimsPrincipal user)
+        {
+            try
+            {
+                
+                var signedinUser = await _userManager.FindByEmailAsync(user.Identity!.Name!);
+                var profile = await _profileRepository.GetAsync(x => x.Id == signedinUser!.Id);
+                var profileAddress = await _profileAddressRepository.GetAllAsync(x => x.ProfileId == profile.Id);
+                
+                var addresses = new List<AddressViewModel>();
+                foreach (var address in profileAddress)
+                {
+                    var Adress = await _addressRepository.GetAsync(x => x.Id == address.AddressId);
+                    addresses.Add(new AddressViewModel
+                    {
+                        StreetName = Adress.StreetName,
+                        City = Adress.City,
+                        PostalCode = Adress.PostalCode,
+                    });
+                }
+                var currentUser = new CurrentUserViewModel
+                {
+                    FirstName = profile.FirstName,
+                    LastName = profile.LastName,
+                    Email = signedinUser!.UserName!,
+                    PhoneNumber = profile.PhoneNumber,
+                    ProfileImage = profile.ProfileImage,
+                    CompanyName = profile.CompanyName,
+                    Address = addresses,
+
+                };
+                return currentUser;
+            }
+            catch
+            {
+                return null!;
+            }
+        }
+
 	}
 }

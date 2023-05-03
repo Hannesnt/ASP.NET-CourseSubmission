@@ -31,7 +31,7 @@ namespace ASP.NET_Course_Submission.Controllers.Account
 				{
 					if (await _authService.SignInAsync(model))
 					{
-						return RedirectToAction("Index", "Account");
+						return RedirectToAction("Index", "Home");
 					}
 					else
 					{

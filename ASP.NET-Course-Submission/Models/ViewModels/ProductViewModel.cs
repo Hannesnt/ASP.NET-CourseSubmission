@@ -10,11 +10,15 @@ namespace ASP.NET_Course_Submission.Models.ViewModels
 		public string Description { get; set; } = null!;
 		public decimal Price { get; set; }
 
+		public int Discount { get; set; }
 		public int CategoryId { get; set; }
+		public string CategoryName { get; set; } = null!;
 		public string ProductImage { get; set; } = null!;
 		public bool New { get; set; }
 		public bool Featured { get; set; }
 		public bool Popular { get; set; }
+
+		public bool OnSale { get; set; }
 
 	}
 }

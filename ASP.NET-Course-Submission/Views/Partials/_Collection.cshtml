@@ -1,0 +1,39 @@
+﻿@inject CategoryService categoryService
+@inject ProductService productService
+@model List<ProductViewModel>
+@{
+	var categories = await categoryService.GetAllCategoriesAsync();
+	var products = await productService.GetAllAsync();
+}
+<section class="products">
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="title">Best Collection</div>
+
+			<div class="categories">
+				@if (categories != null)
+				{
+					<ul class="breadcrumb text-align-center justify-content-center">
+						<li><a asp-controller="Home" asp-action="index">All</a></li>
+						@foreach (var category in categories)
+						{
+							<li><a asp-controller="Home" asp-action="index" asp-route-search="@category.CategoryName" >@category.CategoryName</a></li>
+						}
+					</ul>
+				}
+			</div>
+			@if(Model.Any()){
+				<div class="product-cards d-flex">
+				@foreach (var product in Model.GetRange(0, 8))
+				{
+					<partial name="/Views/Partials/Cards/_ProductCard.cshtml" model="product" />
+				}
+				</div>
+			}
+			else
+			{
+				<p>Finns inga best collection produkter tillhörande denna kategori</p>
+			}
+		</div>
+	</div>
+</section>

@@ -81,7 +81,6 @@ button:hover {
 
 a {
   float: right;
-  color: #FA3150;
 }
 
 input {
@@ -99,14 +98,13 @@ input {
 }
 
 button {
-  background-color: #FA3150 !important;
+  background-color: #FA3150;
   border: 0 !important;
   color: white !important;
 }
 
 span a {
   float: right;
-  color: #FA3150 !important;
   text-decoration: none;
 }
 
@@ -139,6 +137,16 @@ footer {
   footer p {
     margin: 0;
   }
+}
+
+#fullPrice {
+  text-decoration: line-through;
+  margin: 15px 10px;
+}
+
+img {
+  width: 100%;
+  object-fit: contain;
 }
 
 header {
@@ -374,6 +382,7 @@ header button {
 .showcase img {
   width: 100%;
   height: auto;
+  mix-blend-mode: multiply;
 }
 
 .products {
@@ -496,7 +505,6 @@ header button {
 .onSale .onSaleContent .salesCard {
   margin: 20px 0px;
   border: 1px solid lightgrey;
-  height: 422px;
 }
 @media (min-width: 768px) {
   .onSale .onSaleContent .salesCard {
@@ -510,7 +518,7 @@ header button {
 .onSale .onSaleContent .salesCard .productInfo .product-card-title {
   color: #000000;
   display: block;
-  text-align: left;
+  text-align: center;
   margin: 15px 10px;
 }
 .onSale .onSaleContent .salesCard .productInfo #fullPrice {
@@ -1096,4 +1104,37 @@ header button {
 }
 .smallimg .smallimgCard img {
   max-width: 90%;
+}
+
+#message {
+  display: none;
+  color: #000;
+  position: relative;
+  padding: 20px;
+  margin-top: 10px;
+}
+
+#message p {
+  padding: 10px 35px;
+  font-size: 14px;
+}
+
+.valid {
+  color: green;
+}
+
+.valid:before {
+  position: relative;
+  left: -35px;
+  content: "✔";
+}
+
+.invalid {
+  color: red;
+}
+
+.invalid:before {
+  position: relative;
+  left: -35px;
+  content: "✖";
 }

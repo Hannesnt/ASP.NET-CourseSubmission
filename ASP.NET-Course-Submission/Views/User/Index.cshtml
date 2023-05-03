@@ -1,0 +1,20 @@
+﻿@model CurrentUserViewModel
+@{
+	var test = Model.Address;
+}
+<p>@Model.FirstName</p>
+<p>@Model.LastName</p>
+<p>@Model.Email</p>
+<p>@Model.CompanyName</p>
+@if(Model.ProfileImage != null)
+{
+	<img src="@Model.ProfileImage" width="100px" height="100px" />
+}
+else
+{
+	<img src="~/images/profileimage.jpg" width="100px" height="100px"/>
+}
+@foreach(var testar in test)
+{
+	<p>@testar.StreetName @testar.City @testar.PostalCode</p>
+}

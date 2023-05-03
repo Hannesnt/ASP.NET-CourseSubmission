@@ -36,7 +36,7 @@
         .salesCard {
             margin: 20px 0px;
             border: 1px solid lightgrey;
-            height: 422px;
+
 
             @include md {
                 margin: 0px 10px;
@@ -49,7 +49,7 @@
                 .product-card-title {
                     color: $color-dark-1;
                     display: block;
-                    text-align: left;
+                    text-align: center;
                     margin: 15px 10px;
                 }
 

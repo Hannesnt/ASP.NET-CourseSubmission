@@ -75,7 +75,7 @@ button{
 
     a {
         float: right;
-        color: $color-theme-1;
+
     }
 
 input {
@@ -93,14 +93,13 @@ input {
     }
 
 button {
-    background-color: $color-theme-1 !important;
+    background-color: $color-theme-1 ;
     border: 0 !important;
     color: white !important;
 }
 
     span a {
         float: right;
-        color: $color-theme-1 !important;
         text-decoration: none;
     }
 
@@ -131,4 +130,12 @@ footer {
             margin: 0;
         }
     }
+}
+#fullPrice {
+    text-decoration: line-through;
+    margin: 15px 10px;
+}
+img {
+    width: 100%;
+    object-fit: contain;
 }

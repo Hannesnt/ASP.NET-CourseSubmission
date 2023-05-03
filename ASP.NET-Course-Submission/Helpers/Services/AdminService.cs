@@ -12,15 +12,17 @@ namespace ASP.NET_Course_Submission.Helpers.Services
 		private readonly IdentityContext _identityContext;
 		private readonly AddressRepository _addressRepository;
 		private readonly UserManager<IdentityUser> _userManager;
+		private readonly SignInManager<IdentityUser> _signInManager;
 
-		public AdminService(UserManager<IdentityUser> userManager, AddressRepository addressRepository,  IdentityContext identityContext)
-		{
-			_userManager = userManager;
-			_addressRepository = addressRepository;
-			_identityContext = identityContext;
-		}
+        public AdminService(UserManager<IdentityUser> userManager, AddressRepository addressRepository, IdentityContext identityContext, SignInManager<IdentityUser> signInManager)
+        {
+            _userManager = userManager;
+            _addressRepository = addressRepository;
+            _identityContext = identityContext;
+            _signInManager = signInManager;
+        }
 
-		public async Task<bool> AdminRegisterAsync(AdminRegUserViewModel model)
+        public async Task<bool> AdminRegisterAsync(AdminRegUserViewModel model)
 		{
 			try
 			{

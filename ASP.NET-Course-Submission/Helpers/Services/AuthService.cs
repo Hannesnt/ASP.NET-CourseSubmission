@@ -42,9 +42,7 @@ namespace ASP.NET_Course_Submission.Helpers.Services
 
                 IdentityUser identityUser = model;
 				await _userManager.CreateAsync(identityUser, model.Password);
-
                 await _userManager.AddToRoleAsync(identityUser, roleName);
-
                 ProfileEntity profileEntity = model;
 				profileEntity.Id = identityUser.Id;
 				_identityContext.Add(profileEntity);

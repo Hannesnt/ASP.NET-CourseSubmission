@@ -1,69 +1,71 @@
 @import '../core/fonts';
 @import '../core/colors';
 @import '../core/mixins';
-.showcase{
+.showcase {
     background-color: $color-theme-3;
     padding: 60px 0;
 
-    @include lg{
+    @include lg {
         padding: 0 0 60px 0;
     }
-    .container{
+
+    .container {
         display: block;
         text-align: center;
 
-        @include lg{
+        @include lg {
             display: flex;
             align-items: center;
             justify-content: space-between;
         }
     }
 
-    .content{
-        color:$color-dark-2;
+    .content {
+        color: $color-dark-2;
         font-family: $font-poppins;
 
-        @include lg{
+        @include lg {
             flex: 2;
             text-align: left;
             padding-right: 20px;
         }
-        @include xl{
+
+        @include xl {
             flex: 1;
             padding-right: 100px;
-
         }
-        .ingress{
-            
+
+        .ingress {
             font-size: 18px;
             font-weight: $font-weight-regular;
             margin-bottom: 20px;
-
         }
-        .title{
+
+        .title {
             font-size: 40px;
             font-weight: $font-weight-bold;
             line-height: 1.2;
             margin-bottom: 20px;
-            @include lg{
+
+            @include lg {
                 font-size: 60px;
                 margin-bottom: 50px;
             }
         }
     }
-    .content-image{
+
+    .content-image {
         display: none;
-        @include lg{
+
+        @include lg {
             flex: 1;
             display: block;
         }
     }
-    img{
-        
-        
+
+    img {
         width: 100%;
         height: auto;
-
-
+        mix-blend-mode: multiply;
     }
 }

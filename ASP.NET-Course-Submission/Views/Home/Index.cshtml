@@ -1,3 +1,9 @@
-﻿@{
+﻿@model List<ProductViewModel>
+@{
 	ViewData["Title"] = "Home";
 }
+<partial name="/Views/Partials/_ShowCase.cshtml" />
+<partial name="/Views/Partials/_Collection.cshtml" model="Model"/>
+<partial name="/Views/Partials/_OnSale.cshtml" model="Model" />
+<partial name="/Views/Partials/_TopSales.cshtml" model="Model" />
+<partial name="/Views/Partials/_LatestProducts.cshtml" model="Model" />

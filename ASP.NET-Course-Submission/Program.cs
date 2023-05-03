@@ -32,6 +32,7 @@ builder.Services.AddScoped<AdminService>();
 builder.Services.AddScoped<AdminRepository>();
 builder.Services.AddScoped<CategoryService>();
 builder.Services.AddScoped<ProductService>();
+builder.Services.AddScoped<ProfileAddressRepository>();
 
 var app = builder.Build();
 app.UseHsts();

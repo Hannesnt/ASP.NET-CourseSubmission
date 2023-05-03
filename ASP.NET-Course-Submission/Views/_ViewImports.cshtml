@@ -2,4 +2,8 @@
 @using ASP.NET_Course_Submission.Models.ViewModels;
 @using Microsoft.AspNetCore.Identity
 @using ASP.NET_Course_Submission.Helpers.Services;
+@using ASP.NET_Course_Submission.Helpers.Repositories.ContextRepos;
+@using ASP.NET_Course_Submission.Models.Entities;
 @inject SignInManager<IdentityUser> signInManager
+@inject ProductRepository productRepository;
+@inject CategoryService categoryService;

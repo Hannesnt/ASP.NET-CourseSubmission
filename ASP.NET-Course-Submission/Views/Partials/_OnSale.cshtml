@@ -1,0 +1,28 @@
+﻿@model List<ProductViewModel>
+@{
+    int counter = 0;
+}
+<section class="onSale">
+    <div class="onSaleContent">
+        <div class="showcase">
+            <span>On Sale</span>
+            <h2>Up to 50% off</h2>
+            <span>Get The Best Price</span>
+            <p>Get the best daily offer et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren no sea taki</p>
+            <span>Discover More</span>
+        </div>
+        @for(int i = 0; i < Model.Count; i++)
+        {
+            if(Model[i].OnSale == true)
+            {
+                <partial name="/Views/Partials/Cards/_OnSaleProductCard.cshtml" model="Model[i]" />
+                counter++;
+            }
+            if(counter == 2)
+            {
+                break;
+            }
+
+        }
+    </div>
+</section>
