@@ -12,7 +12,7 @@ namespace ASP.NET_Course_Submission.Models.ViewModels
 
 		public int Discount { get; set; }
 		public int CategoryId { get; set; }
-		public string CategoryName { get; set; } = null!;
+		public string? CategoryName { get; set; }
 		public string ProductImage { get; set; } = null!;
 		public bool New { get; set; }
 		public bool Featured { get; set; }
@@ -20,5 +20,39 @@ namespace ASP.NET_Course_Submission.Models.ViewModels
 
 		public bool OnSale { get; set; }
 
+		public static implicit operator RegisterProductViewModel(ProductViewModel model)
+		{
+			return new RegisterProductViewModel
+			{
+				Name = model.Name,
+				Description = model.Description!,
+				Price = model.Price,
+				Discount = model.Discount,
+				CategoryId = model.CategoryId,
+				ProductImage = model.ProductImage,
+				New = model.New,
+				Featured = model.Featured,
+				Popular = model.Popular,
+				OnSale = model.OnSale,
+			};
+		}
+		public static implicit operator ProductEntity(ProductViewModel model)
+		{
+			return new ProductEntity
+			{
+				Id = model.Id,
+				Name = model.Name,
+				Description = model.Description,
+				Price = model.Price,
+				Discount = model.Discount,
+				CategoryId = model.CategoryId,
+				ProductImage = model.ProductImage,
+				New = model.New,
+				Featured = model.Featured,
+				Popular = model.Popular,
+				OnSale = model.OnSale,
+
+			};
+		}
 	}
 }

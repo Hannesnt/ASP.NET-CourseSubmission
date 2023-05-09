@@ -5,7 +5,11 @@
 	ViewData["Title"] = "All users";
 	var roles = await _userService.GetRolesAsync();
 }
-
+<div class="container my-5 ">
+	<div class="row ">
+		<div class="mb-3 d-flex justify-content-center"><h4>All users</h4></div>
 @foreach(var user in Model){
 	<partial name ="/Views/Partials/Admin/_ShowUsers.cshtml" model="user"/>
 }
+	</div>
+</div>

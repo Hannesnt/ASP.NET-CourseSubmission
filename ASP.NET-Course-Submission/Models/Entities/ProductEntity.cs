@@ -33,6 +33,7 @@ namespace ASP.NET_Course_Submission.Models.Entities
                 Id = entity.Id,
                 Name = entity.Name,
                 Price = entity.Price,
+                Description = entity.Description!,
                 ProductImage = entity.ProductImage,
                 CategoryId = entity.CategoryId,
                 New = entity.New,

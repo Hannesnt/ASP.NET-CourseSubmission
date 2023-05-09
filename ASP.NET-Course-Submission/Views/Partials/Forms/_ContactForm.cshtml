@@ -1,0 +1,60 @@
+﻿@model ContactUsViewModel
+
+<section class="Forms mt-5">
+    <div class="container">
+        <div class="row d-flex justify-content-center ">
+            <div class="col-12 col-lg-6 form-border p-5">
+                <form method="post" novalidate>
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="row d-flex">
+                        <p>Write something</p>
+                        <hr>
+                        <div class="col-6">
+                            <label asp-for="FirstName"></label>
+                            <input asp-for="FirstName">
+                            <small><span asp-validation-for="FirstName" class="text-danger"></span></small>
+                        </div>
+                        <div class="col-6">
+                            <label asp-for="LastName"></label>
+                            <input asp-for="LastName">
+                            <small><span asp-validation-for="LastName" class="text-danger"></span></small>
+                        </div>
+                        <div id="firstNameMsg">
+                            <span id="firstNameWarning"></span>
+                        </div>
+                        <div id="lastNameMsg">
+                            <span id="lastNameWarning"></span>
+                        </div>
+                        <div class="col-6">
+                            <label asp-for="Email"></label>
+                            <input asp-for="Email">
+                            <small><span asp-validation-for="Email" class="text-danger"></span></small>
+                        </div>
+                        <div id="emailMsg">
+							<span id="emailWarning"></span>
+						</div>
+                        <div class="col-6">
+                            <label asp-for="PhoneNumber"></label>
+                            <input asp-for="PhoneNumber">
+                            <small><span asp-validation-for="PhoneNumber" class="text-danger"></span></small>
+                        </div>
+                        <div class="col-12">
+                            <p><label asp-for="Description"></label></p>
+                            <textarea asp-for="Description"></textarea>
+                            <small><span asp-validation-for="Description" class="text-danger"></span></small>
+                        </div>
+                        <div id="descriptionMsg">
+                            <span id="descriptionWarning"></span>
+                        </div>
+                        <div>
+                            <button class="btn mt-2" type="submit">Submit</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<script>NameValidation()</script>
+<script>emailValidation()</script>
+<script>descriptionValidation()</script>

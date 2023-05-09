@@ -1,7 +1,7 @@
 ﻿@model ProductViewModel;
 
 <div class="salesCard my-3 col-6 col-md-3">
-	<a asp-controller="products" asp-action="details" asp-route-id="">
+	<a asp-controller="product" asp-action="Details" asp-route-id="@Model.Id">
 		<img class="product-card-img" src="@Model.ProductImage" alt="@Model.Name"/>
 		<div class="productInfo text-center my-2">
 			<span class="product-card-title">@Model.Name</span>

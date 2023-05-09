@@ -1,0 +1,74 @@
+﻿@model ProductViewModel;
+@inject CategoryService categoryService
+
+
+	<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+	<input type="hidden" asp-for="@Model.Id"/>
+	<div class="mb-3">
+		<label asp-for="Name" class="form-label"></label>
+		<input asp-for="Name" class="form-control" placeholder="@Model.Name"/>
+		<small><span asp-validation-for="Name" class="text-danger"></span></small>
+	</div>
+	<div class="mb-3">
+		<label asp-for="Price" class="form-label"></label>
+		<input asp-for="Price" class="form-control" />
+		<small><span asp-validation-for="Price" class="text-danger"></span></small>
+	</div>
+	<div id="priceMsg">
+		<span id="priceWarning"></span>
+	</div>
+	<div class="mb-3">
+		<label asp-for="Description" class="form-label"></label>
+		<textarea asp-for="Description" class="form-control" rows="4"></textarea>
+		<small><span asp-validation-for="Description" class="text-danger"></span></small>
+	</div>
+	<div id="descriptionMsg">
+		<span id="descriptionWarning"></span>
+	</div>
+	<div class="mb-3">
+		<label asp-for="ProductImage" class="form-label"></label>
+		<input asp-for="ProductImage" class="form-control" />
+		<small><span asp-validation-for="ProductImage" class="text-danger"></span></small>
+	</div>
+	<div class="mb-3">
+		<div class="tags">
+			<label class="me-1">New</label>
+			<input class="checkbox m-0" type="checkbox" asp-for="New" />
+		</div>
+		<div class="tags">
+			<label class="me-1">Featured</label>
+			<input class="checkbox  m-0" type="checkbox" asp-for="Featured" />
+		</div>
+		<div class="tags">
+			<label class="me-1">Popular</label>
+			<input class="checkbox  m-0" type="checkbox" asp-for="Popular" />
+		</div>
+		<div class="tags">
+			<label class="me-1">On sale</label>
+			<input class="checkbox  m-0" type="checkbox" asp-for="OnSale" />
+		</div>
+	</div>
+	<div class="mb-3">
+		<label asp-for="Discount" class="form-label"></label>
+		<input asp-for="Discount" class="form-control" />
+		<small><span asp-validation-for="Discount" class="text-danger"></span></small>
+	</div>
+	<div id="discountMsg">
+		<span id="discountWarning"></span>
+	</div>
+<div class="mb-3">
+		<label asp-for="CategoryId" class="form-label"></label>
+		<select asp-for="CategoryId" class="form-control">
+			<option value="">--Select a category--</option>
+			@foreach (var item in await categoryService.GetAllCategoriesAsync())
+			{
+				<option value=@item.Id>@item.CategoryName</option>
+			}
+		</select>
+		<small><span asp-validation-for="CategoryId" class="text-danger"></span></small>
+	</div>
+
+	<div class="modal-footer">
+		<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+		<button type="submit" class="btn btn-primary">Save changes</button>
+	</div>

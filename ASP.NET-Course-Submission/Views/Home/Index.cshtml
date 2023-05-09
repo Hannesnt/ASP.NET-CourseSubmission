@@ -1,9 +1,10 @@
-﻿@model List<ProductViewModel>
+﻿@model Tuple<List<ProductViewModel>, string>
 @{
 	ViewData["Title"] = "Home";
 }
 <partial name="/Views/Partials/_ShowCase.cshtml" />
-<partial name="/Views/Partials/_Collection.cshtml" model="Model"/>
-<partial name="/Views/Partials/_OnSale.cshtml" model="Model" />
-<partial name="/Views/Partials/_TopSales.cshtml" model="Model" />
-<partial name="/Views/Partials/_LatestProducts.cshtml" model="Model" />
+<partial name="/Views/Partials/_Collection.cshtml" model="Model.Item2"/>
+<partial name="/Views/Partials/_OnSale.cshtml" model="Model.Item1" />
+<partial name="/Views/Partials/_TopSales.cshtml" model="Model.Item1" />
+<partial name="/Views/Partials/_LatestProducts.cshtml" model="Model.Item1" />
+<partial name="/Views/Partials/Forms/_NewsLetter.cshtml" />

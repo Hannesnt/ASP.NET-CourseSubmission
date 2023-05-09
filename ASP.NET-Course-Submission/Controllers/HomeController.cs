@@ -16,17 +16,11 @@ namespace ASP.NET_Course_Submission.Controllers
 		{
 			List<ProductViewModel> products;
 
-			if (string.IsNullOrEmpty(search))
-			{
-				products = (List<ProductViewModel>)await _productService.GetAllAsync();
-			}
-			else
-			{
-				products = (List<ProductViewModel>)await _productService.GetProductByCategoryTagNew(search);
-			}
 
+			products = (List<ProductViewModel>)await _productService.GetAllAsync();
 
-			return View(products);
+			var model = new Tuple<List<ProductViewModel>, string>(products, search);
+			return View(model);
 		}
 	}
 }

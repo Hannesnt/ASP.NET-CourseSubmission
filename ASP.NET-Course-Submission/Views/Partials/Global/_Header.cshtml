@@ -14,17 +14,15 @@
             {
                 <a class="link" asp-action="Index" asp-controller="Admin" class="m-4">ADMIN</a>
             }
-        </nav>
-        <nav class="menu-icons">
             @if (signInManager.IsSignedIn(User))
             {
-                <a class="link" asp-action="index" asp-controller="user">@User.FindFirst("DisplayName")?.Value</a>
-                <a class="link" asp-controller="logout" asp-action="SignOut">Logout</a>
+                <a class="link" asp-action="index" asp-controller="user">@User.FindFirst("DisplayName")?.Value.ToUpper()</a>
+                <a class="link" asp-controller="logout" asp-action="SignOut">LOGOUT</a>
             }
             else
             {
-                <a asp-action="Index" asp-controller="Register" class="m-2 link">REGISTER</a>
-                <a asp-action="SignIn" asp-controller="Login" class="m-2 link">LOGIN</a>
+                <a asp-action="Index" asp-controller="Register" class="link">REGISTER</a>
+                <a asp-action="SignIn" asp-controller="Login" class="link">LOGIN</a>
             }
             <a class="link" asp-controller="products" asp-action="search"><i class="fa-regular fa-search"></i></a>
             <a class="link" asp-controller="shopping" asp-action="index"><i class="fa-solid fa-cart-shopping"></i></a>

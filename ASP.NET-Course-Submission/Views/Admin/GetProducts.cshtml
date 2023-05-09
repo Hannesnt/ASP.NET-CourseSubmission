@@ -1,0 +1,38 @@
+﻿@model List<ProductViewModel>
+
+<div class="container">
+	<div class="row">
+		<div class="col-12  d-flex justify-content-center">
+			<div class="col-8 d-flex justify-content-center flex-column align-items-center">
+				<div class="mb-5">
+				<h1>All Products</h1>
+				</div>
+			@foreach (var product in Model)
+			{
+				<div class="col-5 d-flex mb-5 align-items-center flex-column">
+					<img src="@product.ProductImage" height="50" width="50" alt="@product.Name"/>
+					<span>@product.Name</span>
+					<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#@product.Id">
+						Edit product
+					</button>
+				</div>
+				<form method="post" novalidate>
+					<div class="modal fade" id="@product.Id" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h1 class="modal-title fs-5" id="exampleModalLabel">@product.Name</h1>
+									<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+								</div>
+								<div class="modal-body">
+									<partial name="/Views/Partials/Forms/_EditProductForm.cshtml" model="product"/>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+			}
+			</div>
+		</div>
+	</div>
+</div>

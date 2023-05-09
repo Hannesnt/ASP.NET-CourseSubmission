@@ -2,19 +2,60 @@
 @{
 	var test = Model.Address;
 }
-<p>@Model.FirstName</p>
-<p>@Model.LastName</p>
-<p>@Model.Email</p>
-<p>@Model.CompanyName</p>
-@if(Model.ProfileImage != null)
-{
-	<img src="@Model.ProfileImage" width="100px" height="100px" />
-}
-else
-{
-	<img src="~/images/profileimage.jpg" width="100px" height="100px"/>
-}
-@foreach(var testar in test)
-{
-	<p>@testar.StreetName @testar.City @testar.PostalCode</p>
-}
+
+<div class="container">
+	<div class="row d-flex justify-content-center">
+		<div class="col-12 col-lg-10 d-flex flex-column flex-md-row justify-content-center mt-5 form-border p-5">
+			<div class="col-12 col-lg-5 d-flex justify-content-center">
+
+			@if (Model.ProfileImage != null)
+			{
+				<div class="">
+					<img src="@Model.ProfileImage" width="150px" height="250px" />
+				</div>
+			}
+			else
+			{
+				<div class=" ">
+					<img src="~/images/profileimage.jpg" width="150px" height="250px" />
+				</div>
+			}
+			</div>
+			<div class="col-12 col-lg-5 d-flex flex-column justify-content-center">
+			<div>
+				<p>Namn: @Model.FirstName @Model.LastName</p>
+			</div>
+			<div>
+				<p>Email: @Model.Email</p>
+			</div>
+			@if(Model.CompanyName != null)
+			{
+				<div>
+					<p>Företag: @Model.CompanyName</p>
+				</div>
+			}
+			else
+			{
+				<div>
+					<p>Företag: Inget företag angivet</p>
+				</div>
+			}
+			@foreach (var testar in test)
+			{
+				<div>
+					<p>Adress: @testar.StreetName</p>
+				</div>
+				<div>
+					<p>Postnummer: @testar.PostalCode</p>
+				</div>
+				<div>
+					<p>Stad: @testar.City </p>
+				</div>
+			}
+			</div>
+		</div>
+	</div>
+</div>
+
+
+

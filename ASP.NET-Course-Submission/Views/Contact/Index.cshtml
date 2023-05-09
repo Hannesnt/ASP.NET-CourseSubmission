@@ -1,51 +1,5 @@
 ﻿@model ContactUsViewModel
 
 <partial name="/Views/Partials/_ContactBanner.cshtml" />
-<section class="Forms">
-    <div class="container">
-        <div class="row d-flex justify-content-center">
-            <div class="col-12 col-lg-6">
-                <form method="post" novalidate>
-                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                    <div class="row d-flex">
-                        <p>Write something</p>
-                        <hr>
-                        <div class="col-6">
-                            <label asp-for="FirstName"></label>
-                            <input asp-for="FirstName">
-                            <small><span asp-validation-for="FirstName" class="text-danger"></span></small>
-                        </div>
-                        <div class="col-6">
-                            <label asp-for="LastName"></label>
-                            <input asp-for="LastName">
-                            <small><span asp-validation-for="LastName" class="text-danger"></span></small>
-                        </div>
-                        <div class="col-6">
-                            <label asp-for="Email"></label>
-                            <input asp-for="Email">
-                            <small><span asp-validation-for="Email" class="text-danger"></span></small>
-                        </div>
-                        <div class="col-6">
-                            <label asp-for="PhoneNumber"></label>
-                            <input asp-for="PhoneNumber">
-                            <small><span asp-validation-for="PhoneNumber" class="text-danger"></span></small>
-                        </div>
-                        <div class="col-12">
-                            <p><label asp-for="Description"></label></p>
-                            <textarea asp-for="Description" cols="40" rows="5"></textarea>
-                            <small><span asp-validation-for="Description" class="text-danger"></span></small>
-                        </div>
-                        <div class="rememberMe">
-                            <input type="checkbox" class="checkbox">
-                            <label for="password" class="checkboxlabel"> Save my name and email.</label>
-                        </div>
-                        <div>
-                            <button class="btn btn-success mt-2" type="submit">Submit</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</section>
+<partial name="/Views/Partials/Forms/_ContactForm.cshtml" model="Model"/>
 <partial name="/Views/Partials/_GoogleMaps.cshtml" /> 

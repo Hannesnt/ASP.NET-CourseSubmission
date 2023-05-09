@@ -34,12 +34,16 @@
         }
 
         .salesCard {
-            margin: 20px 0px;
             border: 1px solid lightgrey;
 
 
             @include md {
                 margin: 0px 10px;
+            }
+
+
+            img {
+                
             }
 
             .productInfo {
@@ -76,8 +80,6 @@
             align-items: center;
             width: 370px;
             background-color: $color-white;
-            height: 422px;
-            margin-bottom: 30px;
             border: 1px solid lightgrey;
 
             @include md {

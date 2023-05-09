@@ -5,7 +5,7 @@
 
 <section class="Forms">
 	<div class="container">
-		<div class="row d-flex justify-content-center">
+		<div class="row d-flex justify-content-center form-border p-5">
 			<div class="col-6">
 				<form method="post" novalidate>
 					<div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -19,10 +19,16 @@
 						<input asp-for="Price" class="form-control" />
 						<small><span asp-validation-for="Price" class="text-danger"></span></small>
 					</div>
+					<div id="priceMsg">
+						<span id="priceWarning"></span>
+					</div>
 					<div class="mb-3">
 						<label asp-for="Description" class="form-label"></label>
 						<textarea asp-for="Description" class="form-control" rows="4"></textarea>
 						<small><span asp-validation-for="Description" class="text-danger"></span></small>
+					</div>
+					<div id="descriptionMsg">
+						<span id="descriptionWarning"></span>
 					</div>
 					<div class="mb-3">
 						<label asp-for="ProductImage" class="form-label"></label>
@@ -52,6 +58,9 @@
 						<input asp-for="Discount" class="form-control" />
 						<small><span asp-validation-for="Discount" class="text-danger"></span></small>
 					</div>
+					<div id="discountMsg">
+						<span id="discountWarning"></span>
+					</div>
 					<div class="mb-3">
 						<label asp-for="CategoryId" class="form-label"></label>
 						<select asp-for="CategoryId" class="form-control">
@@ -72,3 +81,7 @@
 		</div>
 	</div>
 </section>
+
+<script>discountValidation()</script>
+<script>priceValidation()</script>
+<script>descriptionValidation()</script>

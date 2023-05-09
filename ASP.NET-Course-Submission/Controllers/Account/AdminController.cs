@@ -1,4 +1,5 @@
-﻿using ASP.NET_Course_Submission.Helpers.Services;
+﻿using ASP.NET_Course_Submission.Helpers.Repositories.ContextRepos;
+using ASP.NET_Course_Submission.Helpers.Services;
 using ASP.NET_Course_Submission.Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -11,11 +12,15 @@ public class AdminController : Controller
     private readonly UserService _userService;
     private readonly AdminService _adminService;
 	private readonly ProductService _productService;
-	public AdminController(UserService userService, AdminService adminService, ProductService productService)
+    private readonly ProductRepository _productRepository;
+    private readonly CategoryService _categoryService;
+	public AdminController(UserService userService, AdminService adminService, ProductService productService, ProductRepository productRepository, CategoryService categoryService)
 	{
 		_userService = userService;
 		_adminService = adminService;
 		_productService = productService;
+		_productRepository = productRepository;
+		_categoryService = categoryService;
 	}
 
 	[Authorize(Roles = "admin")]
@@ -104,5 +109,30 @@ public class AdminController : Controller
 		return View();
 	}
 
+    [Authorize(Roles = "admin")]
+    [HttpGet]
+    public async Task<IActionResult> GetProducts()
+    {
+        var products = (List<ProductViewModel>)await _productService.GetAllAsync();
 
+        return View(products);
+    }
+
+	[Authorize(Roles = "admin")]
+	[HttpPost]
+	public async Task<IActionResult> GetProducts(ProductViewModel model)
+	{
+        if(ModelState.IsValid)
+        {
+            if(await _adminService.EditProductAsync(model))
+			{
+				return RedirectToAction("GetProducts", "Admin");
+			}
+			else
+			{
+				return RedirectToAction("GetProducts", "Admin");
+			}
+		}
+		return View(model);
+	}
 }

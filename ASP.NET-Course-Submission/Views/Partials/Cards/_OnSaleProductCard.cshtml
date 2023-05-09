@@ -1,19 +1,19 @@
 ﻿@model ProductViewModel
 
 <div class="salesCard col-6 col-md-3 text-center">
-	<a asp-controller="products" asp-action="details" asp-route-id="">
-		<img class="product-card-img" src="@Model.ProductImage" alt="@Model.Name"/>
+	<a asp-controller="product" asp-action="details" asp-route-id="@Model.Id">
+		<img class="product-card-img" src="@Model.ProductImage" alt="@Model.Name" />
 		<div class="productInfo text-center">
 			<span class="product-card-title">@Model.Name</span>
-			
-			@if(Model.OnSale == true)
+
+			@if (Model.OnSale == true)
 			{
 				<span id="fullPrice" class="product-card-price">$@string.Format("{0:F0}",Model.Price)</span>
 				<span class="product-card-price">$@string.Format("{0:F0}", Model.Price - (Model.Price * Model.Discount / 100))</span>
 			}
 			else
 			{
-				<span  class="product-card-price">$@string.Format("{0:F0}",Model.Price)</span>
+				<span class="product-card-price">$@string.Format("{0:F0}",Model.Price)</span>
 			}
 			<span class="product-card-cart"><i class="fa-solid fa-cart-shopping"></i></span>
 		</div>

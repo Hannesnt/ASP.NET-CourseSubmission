@@ -9,8 +9,8 @@ namespace ASP.NET_Course_Submission.Models.Entities
 	{
 		[Key, ForeignKey(nameof(User))]
 		public string Id { get; set; } = null!;
-		public string FirstName { get; set; } = null!;
-		public string LastName { get; set; } = null!;
+		public string? FirstName { get; set; } = null!;
+		public string? LastName { get; set; } = null!;
 		public string? ProfileImage { get; set; }
 		public string? PhoneNumber { get; set; }
 		public string? CompanyName { get; set; }

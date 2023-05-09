@@ -59,11 +59,19 @@ button{
         color: $color-white;
     }
 }
+.linkBtn{
+    color: white;
+}
 
 .contactBanner {
-    img {
-        width: 100%;
-        height: auto;
+    display: none;
+
+    @include lg {
+        display:block;
+        img {
+            width: 100%;
+            height: auto;
+        }
     }
 }
 
@@ -93,7 +101,8 @@ input {
     }
 
 button {
-    background-color: $color-theme-1 ;
+    background-color: $color-theme-1 !important;
+    
     border: 0 !important;
     color: white !important;
 }
@@ -115,9 +124,7 @@ button {
     display: block;
 }
 footer {
-    display: none;
-
-    @include lg {
+   
         background-color: $color-dark-1;
         height: 120px;
         display: flex;
@@ -126,16 +133,30 @@ footer {
         color: $color-dark-4;
         margin-top: auto;
 
+
         p {
             margin: 0;
         }
-    }
+    
 }
 #fullPrice {
     text-decoration: line-through;
     margin: 15px 10px;
+    }
+.form-border {
+    border: 1px solid black;
+    box-shadow: 9px 8px 20px -5px rgba(0,0,0,0.59);
+    -webkit-box-shadow: 9px 8px 20px -5px rgba(0,0,0,0.59);
+    -moz-box-shadow: 9px 8px 20px -5px rgba(0,0,0,0.59);
 }
-img {
-    width: 100%;
-    object-fit: contain;
+.salesCard {
+    margin: 10px 0px;
 }
+.product-cards{
+    flex-wrap: wrap;
+    
+}
+    .product-card-img{
+        width: 100%;
+        height: auto;
+    }

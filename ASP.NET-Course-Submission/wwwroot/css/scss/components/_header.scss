@@ -168,6 +168,10 @@ header {
         text-align: right;
         z-index: 1;
 
+        .btn-toggle{
+            background-color: $color-dark-1 !important;
+            border-radius: 10px;
+        }
         @include lg {
             display: none;
         }

@@ -4,26 +4,29 @@
     int counter = 0;
     var products = await productService.GetAllAsync();
 }
-<section class="topSelling">
-    <h2>Top selling products this week</h2>
-    <div class="product-cards">
-        @foreach(var product in products)
-        {
-            if(product.Popular == true)
-            {
-                <partial name="/Views/Partials/Cards/_OnSaleProductCard.cshtml" model="product" />
-                counter++;
-                if(counter == 6)
-                {
-                    break;
-                }
-            }
-        }
-        
 
-    </div>
-    <div class="buttons">
-        <button><i class="fa-solid fa-chevron-left"></i></button>
-        <button><i class="fa-solid fa-chevron-right"></i></button>
+
+
+<section class="topSelling">
+    <div class="container">
+        <div class="row d-flex justify-content-center">
+            <div class="d-flex justify-content-center">
+                <h2>Top selling products this week</h2>
+            </div>
+            <div class="product-cards">
+                @foreach(var product in products)
+                {
+                    if(product.Popular == true)
+                    {
+                        <partial name="/Views/Partials/Cards/_ProductCard.cshtml" model="product" />
+                        counter++;
+                        if(counter == 6)
+                        {
+                            break;
+                        }
+                    }
+                }
+            </div>
+        </div>
     </div>
 </section>

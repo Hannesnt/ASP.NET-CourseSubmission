@@ -62,7 +62,7 @@ namespace ASP.NET_Course_Submission.Helpers.Services
 			}
 			return products;
 		}
-        public async Task<IEnumerable<ProductViewModel>> GetProductByCategoryTagNew(string name)
+        public async Task<List<ProductViewModel>> GetProductByCategoryTagNew(string name)
         {
             var products = new List<ProductViewModel>();
             var items = await _context.Products.OrderByDescending(p => p.Id).Include(x => x.Category).Where(x => x.Category.CategoryName == name).ToListAsync();

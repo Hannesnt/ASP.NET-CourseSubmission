@@ -1,38 +1,70 @@
 ﻿@inject CategoryService categoryService
 @inject ProductService productService
-@model List<ProductViewModel>
+@model string;
 @{
 	var categories = await categoryService.GetAllCategoriesAsync();
 	var products = await productService.GetAllAsync();
+	var productbyTag = await productService.GetProductByCategoryTagNew(Model);
 }
 <section class="products">
 	<div class="container">
 		<div class="row justify-content-center">
-			<div class="title">Best Collection</div>
 
-			<div class="categories">
-				@if (categories != null)
-				{
-					<ul class="breadcrumb text-align-center justify-content-center">
-						<li><a asp-controller="Home" asp-action="index">All</a></li>
-						@foreach (var category in categories)
+			@if(Model != null){
+				<div class="title">Best Collection @Model</div>
+				<div class="categories">
+					@if (categories != null)
+					{
+						<ul class="breadcrumb text-align-center justify-content-center">
+							<li><a asp-controller="Home" asp-action="index">All</a></li>
+							@foreach (var category in categories)
+							{
+								<li><a asp-controller="Home" asp-action="index" asp-route-search="@category.CategoryName">@category.CategoryName</a></li>
+							}
+						</ul>
+					}
+				</div>
+				<div class="product-cards d-flex justify-content-center">
+					@foreach (var product in productbyTag.Take(8))
+					{
+						if(product.New == true)
 						{
-							<li><a asp-controller="Home" asp-action="index" asp-route-search="@category.CategoryName" >@category.CategoryName</a></li>
+							<partial name="/Views/Partials/Cards/_ProductCard.cshtml" model="product" />
 						}
-					</ul>
-				}
-			</div>
-			@if(Model.Any()){
-				<div class="product-cards d-flex">
-				@foreach (var product in Model.GetRange(0, 8))
-				{
-					<partial name="/Views/Partials/Cards/_ProductCard.cshtml" model="product" />
-				}
+					}
+					@if (productbyTag.Count == 0)
+					{
+						<div class="my-3">
+							<p>Det finns för tillfället inga best collection produkter för denna kategorin</p>
+						</div>
+					}
 				</div>
 			}
 			else
 			{
-				<p>Finns inga best collection produkter tillhörande denna kategori</p>
+				<div class="title">Best Collection</div>
+				<div class="categories">
+					@if (categories != null)
+					{
+						<ul class="breadcrumb text-align-center justify-content-center">
+							<li><a asp-controller="Home" asp-action="index">All</a></li>
+							@foreach (var category in categories)
+							{
+								<li><a asp-controller="Home" asp-action="index" asp-route-search="@category.CategoryName">@category.CategoryName</a></li>
+							}
+						</ul>
+					}
+				</div>
+				<div class="product-cards d-flex justify-content-center">
+					@foreach (var product in products.Take(8))
+					{
+						if (product.New == true)
+						{
+							<partial name="/Views/Partials/Cards/_ProductCard.cshtml" model="product" />
+						}
+					}
+
+				</div>
 			}
 		</div>
 	</div>

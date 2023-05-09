@@ -20,7 +20,7 @@ namespace ASP.NET_Course_Submission.Models.ViewModels
 		public decimal Price { get; set; }
 
 		[Required(ErrorMessage = "Du måste ange en produktbild")]
-		[Display(Name = "Produktbild")]
+		[Display(Name = "Produktbild *")]
 		public string ProductImage { get; set; } = null!;
 
 		[Required(ErrorMessage = "Du måste välja en kategori")]
@@ -31,8 +31,10 @@ namespace ASP.NET_Course_Submission.Models.ViewModels
 		public bool Featured { get; set; }
 		public bool Popular { get; set; }
         public bool OnSale { get; set; }
-		
-		public int Discount { get; set; }
+
+        [Required(ErrorMessage = "Du måste välja procentuell rabbat 0-100. ")]
+        [Display(Name = "Procentuell rabatt * (0-100)")]
+        public int Discount { get; set; }
 
         public static implicit operator ProductEntity(RegisterProductViewModel RegisterProductViewModel)
 		{
@@ -48,6 +50,22 @@ namespace ASP.NET_Course_Submission.Models.ViewModels
 				Popular = RegisterProductViewModel.Popular,
 				OnSale = RegisterProductViewModel.OnSale,
 				Discount = RegisterProductViewModel.Discount,
+			};
+		}
+		public static implicit operator ProductViewModel(RegisterProductViewModel RegisterProductViewModel)
+		{
+			return new ProductViewModel
+			{
+				Name = RegisterProductViewModel.Name,
+				Description = RegisterProductViewModel.Description!,
+				Price = RegisterProductViewModel.Price,
+				Discount = RegisterProductViewModel.Discount,
+				CategoryId = RegisterProductViewModel.CategoryId,
+				ProductImage = RegisterProductViewModel.ProductImage,
+				New = RegisterProductViewModel.New,
+				Featured = RegisterProductViewModel.Featured,
+				Popular = RegisterProductViewModel.Popular,
+				OnSale = RegisterProductViewModel.OnSale,
 			};
 		}
 	}

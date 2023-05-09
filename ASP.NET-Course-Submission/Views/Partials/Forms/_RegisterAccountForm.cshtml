@@ -4,24 +4,34 @@
 <section class="Forms mt-5">
 	<div class="container">
 		<div class="row d-flex justify-content-center">
-			<div class="col-12 col-lg-6">
+			<div class="col-12 col-lg-6 form-border p-5">
 				<form method="post" novalidate>
-					<div class="row d-flex">
+					<div class="row d-flex ">
 						<div asp-validation-summary="ModelOnly" class="text-danger"></div>
 						<div class="mb-3 col-6">
 							<label asp-for="FirstName" class="form-label"></label>
 							<input asp-for="FirstName"  />
 							<small><span asp-validation-for="FirstName" class="text-danger"></span></small>
 						</div>
+
 						<div class="mb-3 col-6">
 							<label asp-for="LastName" class="form-label"></label>
 							<input asp-for="LastName"/>
 							<small><span asp-validation-for="LastName" class="text-danger"></span></small>
 						</div>
+						<div id="firstNameMsg">
+							<span id="firstNameWarning"></span>
+						</div>
+						<div id="lastNameMsg">
+							<span id="lastNameWarning"></span>
+						</div>
 						<div class="mb-3 col-12">
 							<label asp-for="Email" class="form-label"></label>
 							<input asp-for="Email" />
 							<small><span asp-validation-for="Email" class="text-danger"></span></small>
+						</div>
+						<div id="emailMsg">
+							<span id="emailWarning"></span>
 						</div>
 						<div class="mb-3">
 							<label asp-for="Password" class="form-label"></label>
@@ -36,8 +46,11 @@
 						</div>
 						<div class="mb-3">
 							<label asp-for="ConfirmPassword" class="form-label"></label>
-							<input asp-for="ConfirmPassword"  />
+							<input asp-for="ConfirmPassword" />
 							<small><span asp-validation-for="ConfirmPassword" class="text-danger"></span></small>
+						</div>
+						<div id="confirmMessage">
+							<p id="matchMsg" class="invalid"></p>
 						</div>
 						<div class="mb-3 col-12">
 							<label asp-for="StreetName" class="form-label"></label>
@@ -49,10 +62,16 @@
 							<input asp-for="PostalCode" />
 							<small><span asp-validation-for="PostalCode" class="text-danger"></span></small>
 						</div>
+						<div id="postCodeMsg">
+							<span id="postCodeWarning"></span>
+						</div>
 						<div class="mb-3 col-6">
 							<label asp-for="City" class="form-label"></label>
 							<input asp-for="City" />
 							<small><span asp-validation-for="City" class="text-danger"></span></small>
+						</div>
+						<div id="cityMsg">
+							<span id="cityWarning"></span>
 						</div>
 						<div class="mb-3 col-6">
 							<label asp-for="Phone" class="form-label"></label>
@@ -78,3 +97,8 @@
 
 </section>
 <script>pswValidation()</script>
+<script>ConfirmPsw()</script>
+<script>NameValidation()</script>
+<script>emailValidation()</script>
+<script>postalCodeValidation()</script>
+<script>cityValidation()</script>

@@ -9,12 +9,14 @@
 
 }
 <div class="container">
-	<div class="row justify-content-center">
-
+	<div class="row justify-content-center text-center">
+		<div class="my-4">
+			<h2>Produkter</h2>
+		</div>
 		<div class="categories">
 			@if (categories != null)
 			{
-				<ul class="breadcrumb text-align-center justify-content-center">
+				<ul class="breadcrumb text-align-center justify-content-center mb-5">
 					<li><a asp-controller="product" asp-action="index" class="m-2">All</a></li>
 					@foreach (var category in categories)
 					{
@@ -32,19 +34,15 @@
 		{
 			foreach (var product in Model)
 			{
-				<div class="mb-3 mt-3 col-3 text-center d-flex justify-content-center">
-					<a asp-controller="product" asp-action="Details" asp-route-id="@product.Id" >
-						<img src="/images/placeholders/200x122.svg" />
-						<div>@product.Name</div>
-						<div>$@string.Format("{0:F0}", product.Price)</div>
-						<div>@product.Description</div>
-					</a>
-				</div>
+
+				<partial name="/Views/Partials/Cards/_ProductCard.cshtml" model="product" />
 			}
 		}
 		else
 		{
-			<p>Finns inga produkter tillhörande denna kategori</p>
+			<div class="text-center"> 
+				<p>Finns inga produkter tillhörande denna kategori</p>
+			</div>
 		}
 
 	</div>

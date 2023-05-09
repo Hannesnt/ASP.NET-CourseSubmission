@@ -1,4 +1,5 @@
-﻿using ASP.NET_Course_Submission.Helpers.Repositories.IdentityRepos;
+﻿using ASP.NET_Course_Submission.Helpers.Repositories.ContextRepos;
+using ASP.NET_Course_Submission.Helpers.Repositories.IdentityRepos;
 using ASP.NET_Course_Submission.Models.Context;
 using ASP.NET_Course_Submission.Models.Entities;
 using ASP.NET_Course_Submission.Models.ViewModels;
@@ -13,16 +14,18 @@ namespace ASP.NET_Course_Submission.Helpers.Services
 		private readonly AddressRepository _addressRepository;
 		private readonly UserManager<IdentityUser> _userManager;
 		private readonly SignInManager<IdentityUser> _signInManager;
+		private readonly ProductRepository _productRepository;
 
-        public AdminService(UserManager<IdentityUser> userManager, AddressRepository addressRepository, IdentityContext identityContext, SignInManager<IdentityUser> signInManager)
-        {
-            _userManager = userManager;
-            _addressRepository = addressRepository;
-            _identityContext = identityContext;
-            _signInManager = signInManager;
-        }
+		public AdminService(UserManager<IdentityUser> userManager, AddressRepository addressRepository, IdentityContext identityContext, SignInManager<IdentityUser> signInManager, ProductRepository productRepository)
+		{
+			_userManager = userManager;
+			_addressRepository = addressRepository;
+			_identityContext = identityContext;
+			_signInManager = signInManager;
+			_productRepository = productRepository;
+		}
 
-        public async Task<bool> AdminRegisterAsync(AdminRegUserViewModel model)
+		public async Task<bool> AdminRegisterAsync(AdminRegUserViewModel model)
 		{
 			try
 			{
@@ -90,5 +93,18 @@ namespace ASP.NET_Course_Submission.Helpers.Services
 			}
 		
 		} 
+		public async Task<bool> EditProductAsync(ProductViewModel model)
+		{
+
+			if (model != null)
+			{
+				await _productRepository.UpdateAsync(model);
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
 	}
 }
