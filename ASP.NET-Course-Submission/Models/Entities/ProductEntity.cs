@@ -17,14 +17,9 @@ namespace ASP.NET_Course_Submission.Models.Entities
 
         public CategoryEntity Category { get; set; } = null!;
 
-        public bool New { get; set; }
-
-        public bool Featured { get; set; }
-
-        public bool Popular { get; set; }
-        public bool OnSale { get; set; }
-
         public int Discount { get; set; }
+
+        public ICollection<ProductTagEntity> ProductTags { get; set; } = new HashSet<ProductTagEntity>();
 
         public static implicit operator ProductViewModel(ProductEntity entity)
 		{
@@ -36,10 +31,6 @@ namespace ASP.NET_Course_Submission.Models.Entities
                 Description = entity.Description!,
                 ProductImage = entity.ProductImage,
                 CategoryId = entity.CategoryId,
-                New = entity.New,
-                Featured = entity.Featured,
-                Popular = entity.Popular,
-                OnSale = entity.OnSale,
                 Discount = entity.Discount
 			};
 		}

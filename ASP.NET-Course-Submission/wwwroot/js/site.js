@@ -199,12 +199,12 @@ const cityValidation = () => {
 }
 
 const descriptionValidation = () => {
-    const regEx = /^[A-Za-z0-9]{1,500}$/;
+    const regEx = /^[\s\S]{1,500}$/;
     const description = document.getElementById("Description");
 
     description.onblur = function () {
         if (description.value.match(regEx)) {
-            document.getElementById("cityMsg").style.display = "none";
+            document.getElementById("descriptionMsg").style.display = "none";
         }
     }
     description.onkeyup = function () {
@@ -220,7 +220,7 @@ const descriptionValidation = () => {
 }
 
 const priceValidation = () => {
-    const regEx = /^\d+$/;
+    const regEx = /^[0-9,]+$/;
     const price = document.getElementById("Price");
 
     price.onblur = function () {
@@ -241,7 +241,7 @@ const priceValidation = () => {
 }
 
 const discountValidation = () => {
-    const regEx = /^(?:100|[1-9][0-9]?|[1-9])$/;
+    const regEx = /^(?:100|\d{1,2})$/;
     const discount = document.getElementById("Discount");
 
     discount.onblur = function () {

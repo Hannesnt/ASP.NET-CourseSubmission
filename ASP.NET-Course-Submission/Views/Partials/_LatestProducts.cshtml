@@ -2,7 +2,6 @@
 @inject ProductService productService
 @{
 	var products = await productService.DiscoverProductsAsync();
-	
 }
 
 @if (products != null)
@@ -16,7 +15,6 @@
 				<div class="row d-flex justify-content-center">
 					@foreach (var product in products)
 					{
-
 						<partial name="/Views/Partials/Cards/_ProductCard.cshtml" model="product" />
 					}
 				</div>

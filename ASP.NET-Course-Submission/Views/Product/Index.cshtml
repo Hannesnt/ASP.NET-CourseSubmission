@@ -8,6 +8,7 @@
 	var categories = await categoryService.GetAllCategoriesAsync();
 
 }
+<div class="products">
 <div class="container">
 	<div class="row justify-content-center text-center">
 		<div class="my-4">
@@ -17,15 +18,16 @@
 			@if (categories != null)
 			{
 				<ul class="breadcrumb text-align-center justify-content-center mb-5">
-					<li><a asp-controller="product" asp-action="index" class="m-2">All</a></li>
+					<li><a asp-controller="product" asp-action="index">All</a></li>
 					@foreach (var category in categories)
 					{
-						<li><a asp-controller="product" asp-action="index" asp-route-search="@category.CategoryName" class="m-2">@category.CategoryName</a></li>
+						<li><a asp-controller="product" asp-action="index" asp-route-search="@category.CategoryName" >@category.CategoryName</a></li>
 					}
 				</ul>
 			}
 		</div>
 	</div>
+</div>
 </div>
 
 <div class="container">

@@ -20,6 +20,7 @@ namespace ASP.NET_Course_Submission.Models.ViewModels
 
 		public bool OnSale { get; set; }
 
+
 		public static implicit operator RegisterProductViewModel(ProductViewModel model)
 		{
 			return new RegisterProductViewModel
@@ -30,9 +31,6 @@ namespace ASP.NET_Course_Submission.Models.ViewModels
 				Discount = model.Discount,
 				CategoryId = model.CategoryId,
 				ProductImage = model.ProductImage,
-				New = model.New,
-				Featured = model.Featured,
-				Popular = model.Popular,
 				OnSale = model.OnSale,
 			};
 		}
@@ -47,11 +45,6 @@ namespace ASP.NET_Course_Submission.Models.ViewModels
 				Discount = model.Discount,
 				CategoryId = model.CategoryId,
 				ProductImage = model.ProductImage,
-				New = model.New,
-				Featured = model.Featured,
-				Popular = model.Popular,
-				OnSale = model.OnSale,
-
 			};
 		}
 	}

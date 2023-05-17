@@ -5,16 +5,8 @@
 		<img class="product-card-img" src="@Model.ProductImage" alt="@Model.Name" />
 		<div class="productInfo text-center">
 			<span class="product-card-title">@Model.Name</span>
-
-			@if (Model.OnSale == true)
-			{
 				<span id="fullPrice" class="product-card-price">$@string.Format("{0:F0}",Model.Price)</span>
 				<span class="product-card-price">$@string.Format("{0:F0}", Model.Price - (Model.Price * Model.Discount / 100))</span>
-			}
-			else
-			{
-				<span class="product-card-price">$@string.Format("{0:F0}",Model.Price)</span>
-			}
 			<span class="product-card-cart"><i class="fa-solid fa-cart-shopping"></i></span>
 		</div>
 	</a>

@@ -14,13 +14,15 @@ public class AdminController : Controller
 	private readonly ProductService _productService;
     private readonly ProductRepository _productRepository;
     private readonly CategoryService _categoryService;
-	public AdminController(UserService userService, AdminService adminService, ProductService productService, ProductRepository productRepository, CategoryService categoryService)
+	private readonly TagService _tagService;
+	public AdminController(UserService userService, AdminService adminService, ProductService productService, ProductRepository productRepository, CategoryService categoryService, TagService tagService)
 	{
 		_userService = userService;
 		_adminService = adminService;
 		_productService = productService;
 		_productRepository = productRepository;
 		_categoryService = categoryService;
+		_tagService = tagService;
 	}
 
 	[Authorize(Roles = "admin")]
@@ -84,28 +86,27 @@ public class AdminController : Controller
     }
 	[Authorize(Roles = "admin")]
 	[HttpGet]
-	public IActionResult CreateProduct()
+	public async Task<IActionResult> CreateProduct()
 	{
-
+		ViewBag.Tags = await _tagService.GetTagsAsync();
 		return View();
 	}
 
 
 	[Authorize(Roles = "admin")]
 	[HttpPost]
-	public async Task<IActionResult> CreateProduct(RegisterProductViewModel model)
+	public async Task<IActionResult> CreateProduct(RegisterProductViewModel model, string[] tags)
 	{
 		if (ModelState.IsValid)
 		{
 			if (await _productService.CreateAsync(model))
 			{
-				return RedirectToAction("Index", "admin");
+				await _productService.AddProductTagsAsync(model, tags);
+				return RedirectToAction("GetProducts", "Admin");
 			}
-			else
-			{
-				return RedirectToAction("Index", "admin");
-			}
+			ModelState.AddModelError("", "Product already exists.");
 		}
+		ViewBag.Tags = await _tagService.GetTagsAsync(tags);
 		return View();
 	}
 
@@ -133,6 +134,22 @@ public class AdminController : Controller
 				return RedirectToAction("GetProducts", "Admin");
 			}
 		}
-		return View(model);
+		else
+		{
+			return RedirectToAction("GetProducts", "Admin");
+		}
+		
+	}
+	public async Task<IActionResult> RemoveProduct(ProductViewModel model)
+	{
+		
+		if(await _productService.RemoveProductAsync(model))
+		{
+			return RedirectToAction("GetProducts", "Admin");
+		}
+		else
+		{
+			return RedirectToAction("GetProducts", "Admin");
+		}
 	}
 }

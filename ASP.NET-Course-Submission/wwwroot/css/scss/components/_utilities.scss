@@ -79,6 +79,10 @@ button{
         display: flex;
         justify-content: center;
         align-items: center;
+
+        textarea{
+            width:100%;
+        }
     }
 
     a {
@@ -156,7 +160,13 @@ footer {
     flex-wrap: wrap;
     
 }
-    .product-card-img{
-        width: 100%;
-        height: auto;
-    }
+.product-card-img {
+    width: 100%;
+    height: 220px;
+    object-fit: contain;
+}
+.adminProducts{
+    border: 1px solid gray;
+    padding: 10px 0px;
+    margin: 10px;
+}

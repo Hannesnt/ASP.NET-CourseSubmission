@@ -33,6 +33,13 @@ namespace ASP.NET_Course_Submission.Helpers.Services
 			return item!;
 
         }
+		public async Task<CategoryViewModel> GetAsync(string name)
+		{
+			var item = await _context.Categories.FirstOrDefaultAsync(x => x.CategoryName == name);
+			return item!;
+
+		}
+
 		public async Task<string> GetCategoryName(int id)
 		{
 			var name = "";

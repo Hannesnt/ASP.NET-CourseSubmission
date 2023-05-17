@@ -90,6 +90,9 @@ button:hover {
   justify-content: center;
   align-items: center;
 }
+.Forms textarea {
+  width: 100%;
+}
 
 a {
   float: right;
@@ -168,7 +171,14 @@ footer p {
 
 .product-card-img {
   width: 100%;
-  height: auto;
+  height: 220px;
+  object-fit: contain;
+}
+
+.adminProducts {
+  border: 1px solid gray;
+  padding: 10px 0px;
+  margin: 10px;
 }
 
 header {
@@ -407,7 +417,8 @@ header button {
 }
 .showcase img {
   width: 100%;
-  height: auto;
+  height: 500px;
+  object-fit: contain;
   mix-blend-mode: multiply;
 }
 
@@ -480,15 +491,24 @@ header button {
   justify-content: center;
   flex-wrap: wrap;
 }
+.onSale .onSaleContent #one {
+  order: 1;
+}
 @media (min-width: 992px) {
   .onSale .onSaleContent #one {
-    order: 3;
+    order: 2;
   }
+}
+.onSale .onSaleContent div:nth-child(2) {
+  order: 2;
 }
 @media (min-width: 992px) {
   .onSale .onSaleContent div:nth-child(2) {
     order: 1;
   }
+}
+.onSale .onSaleContent div:nth-child(3) {
+  order: 3;
 }
 @media (min-width: 992px) {
   .onSale .onSaleContent div:nth-child(3) {
@@ -497,11 +517,18 @@ header button {
 }
 .onSale .onSaleContent .salesCard {
   border: 1px solid lightgrey;
+  display: flex;
+  justify-content: center;
+  background-color: white;
 }
 @media (min-width: 768px) {
   .onSale .onSaleContent .salesCard {
     margin: 0px 10px;
   }
+}
+.onSale .onSaleContent .salesCard img {
+  width: 100%;
+  height: 220px;
 }
 .onSale .onSaleContent .salesCard .productInfo {
   background-color: #ffffff;
@@ -527,20 +554,16 @@ header button {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 370px;
   background-color: #ffffff;
   border: 1px solid lightgrey;
 }
 @media (min-width: 768px) {
   .onSale .onSaleContent .showcase {
-    width: 93%;
-    text-align: center;
+    padding: 0;
   }
 }
 @media (min-width: 992px) {
   .onSale .onSaleContent .showcase {
-    width: 370px;
-    padding: 0;
     order: 2;
   }
 }
@@ -728,7 +751,7 @@ header button {
 }
 @media (min-width: 768px) {
   .productSection .productImages {
-    max-width: 50%;
+    max-width: 30%;
   }
 }
 .productSection .productImages .smallImages {
@@ -918,16 +941,17 @@ header button {
   }
 }
 .productInformation .info {
-  margin: 0px 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
+  display: none;
 }
 @media (min-width: 768px) {
   .productInformation .info {
     order: 1;
+    margin: 0px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
   }
 }
 @media (min-width: 992px) {

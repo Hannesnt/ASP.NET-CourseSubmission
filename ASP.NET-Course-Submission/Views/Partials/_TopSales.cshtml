@@ -2,7 +2,7 @@
 @inject ProductService productService
 @{
     int counter = 0;
-    var products = await productService.GetAllAsync();
+    var products = await productService.GetProductByTag("Popular");
 }
 
 
@@ -16,15 +16,13 @@
             <div class="product-cards">
                 @foreach(var product in products)
                 {
-                    if(product.Popular == true)
-                    {
                         <partial name="/Views/Partials/Cards/_ProductCard.cshtml" model="product" />
                         counter++;
                         if(counter == 6)
                         {
                             break;
                         }
-                    }
+                    
                 }
             </div>
         </div>

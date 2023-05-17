@@ -15,7 +15,7 @@
         text-align: center;
         @include md{
             
-            max-width: 50%;
+            max-width: 30%;
         }
         .smallImages{
             display: flex;
@@ -29,177 +29,208 @@
     
 
 }
-.productInformation{
+.productInformation {
     display: flex;
     flex-direction: column;
     justify-content: center;
 
-    @include lg{
+    @include lg {
         justify-content: flex-start;
         max-width: 40%;
         margin-left: 60px;
+    }
+
+    .reviewDiv {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 5px 0px;
+        align-self: center;
+
+        span {
+            margin-left: 5px;
         }
 
-    .reviewDiv{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 5px 0px;
-    align-self: center;
-    span{
-        margin-left: 5px;
+        @include md {
+            order: 3;
+        }
+
+        @include lg {
+            text-align: left;
+            align-items: left;
+            align-self: baseline;
+        }
     }
-    @include md{
-        order: 3;
-    }
-    @include lg{
-        text-align: left;
-        align-items: left;
-        align-self: baseline;
-    }
-    }
-    .price{
+
+    .price {
         justify-content: center;
         align-items: center;
         text-align: center;
         font-size: 20px;
         margin-top: 10px;
         margin-bottom: 0;
-        @include md{
+
+        @include md {
             order: 4;
         }
-        @include lg{
+
+        @include lg {
             text-align: left;
         }
-        
     }
-    .Cart{
+
+    .Cart {
         display: flex;
         justify-content: center;
         margin: 20px 0px;
-        @include md{
+
+        @include md {
             order: 5;
         }
-        @include lg{
+
+        @include lg {
             justify-content: flex-start;
         }
-        .QuantityBtns{
+
+        .QuantityBtns {
             display: flex;
             justify-content: center;
             align-items: center;
             margin-right: 10px;
             order: 5;
-            @include lg{
+
+            @include lg {
                 margin-left: 20px;
             }
-            button{
+
+            button {
                 padding: 3px 10px;
                 font-size: 15px;
             }
-            div{
+
+            div {
                 display: flex;
                 justify-content: center;
                 align-items: center;
                 border: 1px solid grey;
                 height: 35px;
                 width: 35px;
-                p{
+
+                p {
                     margin: 0;
                 }
             }
         }
-        button{
+
+        button {
             padding: 0 10px;
             background-color: $color-theme-1;
             color: $color-white;
             border: $color-theme-1;
         }
-    }  
-    .colors{
+    }
+
+    .colors {
         display: flex;
         justify-content: space-evenly;
-        @include md{
+
+        @include md {
             order: 6;
         }
-        @include lg{
-            justify-content: flex-start;
 
+        @include lg {
+            justify-content: flex-start;
         }
-        div{
+
+        div {
             display: flex;
             text-align: center;
             justify-content: center;
             align-items: center;
-            i{
+
+            i {
                 margin: 0px 2px;
-                
             }
         }
-        p{
+
+        p {
             text-align: center;
             margin: 0;
-            @include lg{
+
+            @include lg {
                 margin-left: 10px;
             }
         }
-    } 
-    .wishlist{
+    }
+
+    .wishlist {
         display: flex;
         justify-content: center;
         flex-direction: column;
         align-items: center;
-        @include md{
+
+        @include md {
             order: 7;
         }
-        @include lg{
+
+        @include lg {
             align-items: baseline;
         }
-        .wishlistBtn{
+
+        .wishlistBtn {
             padding: 5px 10px;
             margin: 10px 0px;
             border: 1px solid $color-dark-2;
             color: $color-dark-3;
-            @include lg{
+
+            @include lg {
                 margin: 20px 0px;
             }
         }
-        p{
+
+        p {
             margin: 10px 0px;
             font-size: 13px;
         }
     }
-    .mobileHr{
+
+    .mobileHr {
         margin: 10px 50px;
-        @include md{
-            order:2;
+
+        @include md {
+            order: 2;
         }
-        @include lg{
-            order:2;
+
+        @include lg {
+            order: 2;
             margin: 10px 0px;
         }
     }
-    .info{
-        margin: 0px 20px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-        @include md{
-            order: 1;
-        }
-        @include lg{
-            margin: 0px 0px;
-            align-items:baseline;
-            text-align:left;
 
+    .info {
+        display: none;
+        @include md {
+            order: 1;
+            margin: 0px 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
         }
-        p:nth-child(1){
+
+        @include lg {
+            margin: 0px 0px;
+            align-items: baseline;
+            text-align: left;
+        }
+
+        p:nth-child(1) {
             font-size: 20px;
         }
-        p:nth-child(2){
+
+        p:nth-child(2) {
             font-size: 14px;
         }
     }
-    
 }

@@ -4,15 +4,51 @@
 @{
 	var categories = await categoryService.GetAllCategoriesAsync();
 	var products = await productService.GetAllAsync();
-	var productbyTag = await productService.GetProductByCategoryTagNew(Model);
+	var productbyTag = await productService.GetProductByTag("New");
+	var productsByCategory = new List<ProductViewModel>();
+	if(Model != null)
+	{
+		productsByCategory = await productService.GetProductByCategoryAndTag("New", Model);
+	}
+
 }
 <section class="products">
 	<div class="container">
 		<div class="row justify-content-center">
 
 			@if(Model != null){
-				<div class="title">Best Collection @Model</div>
+				<div class="title my-4">Best Collection: @Model</div>
 				<div class="categories">
+					@if (categories != null)
+					{
+						<ul class="breadcrumb text-align-center justify-content-center">
+							<li><a asp-controller="Home" asp-action="index">All</a></li>
+							@foreach (var category in categories)
+							{
+								<li><a asp-controller="Home" asp-action="index" asp-route-search="@category.CategoryName">@category.CategoryName</a></li>
+							}
+						</ul>
+					}
+				</div>
+				<div class="product-cards d-flex justify-content-center">
+
+					@foreach (var product in productsByCategory.Take(8))
+					{
+
+							<partial name="/Views/Partials/Cards/_ProductCard.cshtml" model="product" />
+					}
+					@if (productsByCategory.Count == 0)
+					{
+						<div class="my-3">
+							<p>Det finns för tillfället inga best collection produkter för denna kategorin</p>
+						</div>
+					}
+				</div> 
+			}
+			else
+			{
+				<div class="title">Best Collection</div>
+				<div class="categories my-4">
 					@if (categories != null)
 					{
 						<ul class="breadcrumb text-align-center justify-content-center">
@@ -27,41 +63,8 @@
 				<div class="product-cards d-flex justify-content-center">
 					@foreach (var product in productbyTag.Take(8))
 					{
-						if(product.New == true)
-						{
+
 							<partial name="/Views/Partials/Cards/_ProductCard.cshtml" model="product" />
-						}
-					}
-					@if (productbyTag.Count == 0)
-					{
-						<div class="my-3">
-							<p>Det finns för tillfället inga best collection produkter för denna kategorin</p>
-						</div>
-					}
-				</div>
-			}
-			else
-			{
-				<div class="title">Best Collection</div>
-				<div class="categories">
-					@if (categories != null)
-					{
-						<ul class="breadcrumb text-align-center justify-content-center">
-							<li><a asp-controller="Home" asp-action="index">All</a></li>
-							@foreach (var category in categories)
-							{
-								<li><a asp-controller="Home" asp-action="index" asp-route-search="@category.CategoryName">@category.CategoryName</a></li>
-							}
-						</ul>
-					}
-				</div>
-				<div class="product-cards d-flex justify-content-center">
-					@foreach (var product in products.Take(8))
-					{
-						if (product.New == true)
-						{
-							<partial name="/Views/Partials/Cards/_ProductCard.cshtml" model="product" />
-						}
 					}
 
 				</div>

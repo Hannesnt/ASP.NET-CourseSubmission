@@ -65,7 +65,8 @@
 
     img {
         width: 100%;
-        height: auto;
+        height: 500px;
+        object-fit: contain;
         mix-blend-mode: multiply;
     }
 }

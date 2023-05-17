@@ -1,5 +1,7 @@
-﻿using System.Linq.Expressions;
+﻿
+using System.Text.Json;
 using ASP.NET_Course_Submission.Helpers.Repositories.ContextRepos;
+using ASP.NET_Course_Submission.Migrations.Data;
 using ASP.NET_Course_Submission.Models.Context;
 using ASP.NET_Course_Submission.Models.Entities;
 using ASP.NET_Course_Submission.Models.ViewModels;
@@ -14,25 +16,36 @@ namespace ASP.NET_Course_Submission.Helpers.Services
 		private readonly DataContext _context;
 		private readonly ProductRepository _repository;
 		private readonly CategoryService _categoryService;
-        public ProductService(DataContext context, ProductRepository repository, CategoryService categoryService)
-        {
-            _context = context;
-            _repository = repository;
-            _categoryService = categoryService;
-        }
-        public async Task<bool> CreateAsync(RegisterProductViewModel model)
+		private readonly IHttpContextAccessor _httpContextAccessor;
+		private readonly ProductTagRepository _productTagRepository;
+		private readonly TagRepository _tagRepository;
+		public ProductService(DataContext context, ProductRepository repository, CategoryService categoryService, IHttpContextAccessor httpContextAccessor, ProductTagRepository productTagRepository, TagRepository tagRepository)
+		{
+			_context = context;
+			_repository = repository;
+			_categoryService = categoryService;
+			_httpContextAccessor = httpContextAccessor;
+			_productTagRepository = productTagRepository;
+			_tagRepository = tagRepository;
+		}
+		public async Task<bool> CreateAsync(RegisterProductViewModel model)
 		{
 			try
 			{
-				await _repository.CreateAsync(model);
-				return true;
+				if(await _repository.GetAsync(x => x.Name == model.Name) == null)
+				{
+                    await _repository.CreateAsync(model);
+                    return true;
+                }
+
+				return false;
 			}
 			catch
 			{
 				return false;
 			}
 		}
-		public async Task<IEnumerable<ProductViewModel>> GetAllAsync()
+		public async Task<List<ProductViewModel>> GetAllAsync()
 		{
 			var products = new List<ProductViewModel>();
 			var items = await _context.Products.ToListAsync();
@@ -51,31 +64,65 @@ namespace ASP.NET_Course_Submission.Helpers.Services
 
 			return product;
 		}
-		public async Task<IEnumerable<ProductViewModel>> GetProductByCategory(string name)
+
+		public async Task<List<ProductViewModel>> GetProductByCategory(string name)
 		{
 			var products = new List<ProductViewModel>();
-			var items = await _context.Products.OrderByDescending(p => p.Id).Include(x => x.Category).Where(x => x.Category.CategoryName == name).ToListAsync();
-			foreach (var item in items)
-			{
-				ProductViewModel productModel = item;
-				products.Add(productModel);
-			}
-			return products;
-		}
-        public async Task<List<ProductViewModel>> GetProductByCategoryTagNew(string name)
-        {
-            var products = new List<ProductViewModel>();
-            var items = await _context.Products.OrderByDescending(p => p.Id).Include(x => x.Category).Where(x => x.Category.CategoryName == name).ToListAsync();
+            var items = await _repository.GetAllAsync();
+            var category = await _categoryService.GetAsync(name);
             foreach (var item in items)
             {
-				if(item.New == true)
-				{
-                    ProductViewModel productModel = item;
-                    products.Add(productModel);
+                if (item.CategoryId == category.Id)
+                {
+                    products.Add(item);
                 }
             }
+
             return products;
         }
+        public async Task<List<ProductViewModel>> GetProductByTag(string name)
+        {
+            var products = new List<ProductViewModel>();
+			var tags = await _tagRepository.GetAsync(x => x.Name == name);
+			var items = await _productTagRepository.GetAllAsync(x => x.Tag == tags);
+
+			foreach(var item in items)
+			{
+				var product = await _repository.GetAsync(x => x.Id == item.ProductId);
+				products.Add(product);
+			}
+
+            return products;
+        }
+		public async Task<List<ProductViewModel>> GetProductByCategoryAndTag(string name, string categoryName)
+		{
+			var products = new List<ProductViewModel>();
+			var tags = await _tagRepository.GetAsync(x => x.Name == name);
+			var items = await _productTagRepository.GetAllAsync(x => x.Tag == tags);
+			var category = await _categoryService.GetAsync(categoryName);
+			foreach (var item in items)
+			{
+				var product = await _repository.GetAsync(x => x.Id == item.ProductId);
+				if(product.CategoryId == category.Id)
+				{
+					products.Add(product);
+				}
+			}
+
+			return products;
+		}
+		public async Task AddProductTagsAsync(ProductEntity entity, string[] tags)
+		{
+			var product = await _repository.GetAsync(x => x.Name == entity.Name);
+			foreach(var tag in tags)
+			{
+				await _productTagRepository.CreateAsync(new ProductTagEntity
+				{
+					ProductId = product.Id,
+					TagId = int.Parse(tag)
+				});
+			}
+		} 
         public async Task<List<ProductViewModel>> DiscoverProductsAsync()
         {
             var products = new List<ProductViewModel>();
@@ -105,15 +152,10 @@ namespace ASP.NET_Course_Submission.Helpers.Services
 					Discount = item.Discount,
 					CategoryId = category,
 					ProductImage = item.ProductImage,
-					New = item.New,
-					Featured = item.Featured,
-					Popular = item.Popular,
-					OnSale = item.OnSale,
 					CategoryName = categoryName
 
 				};
                     products.Add(productModel);
-                
             }
             return products;
         }
@@ -121,11 +163,48 @@ namespace ASP.NET_Course_Submission.Helpers.Services
         public async Task<ProductViewModel> ShowCaseProduct()
 		{
 			var random = new Random();
-			var product = await _context.Products.Where(x => x.Featured == true).ToListAsync();
-			var index = random.Next(product.Count);
+			var tagProductList = await _productTagRepository.GetAllAsync(x => x.TagId == 2);
+			var productList = new List<ProductTagEntity>();
+			foreach(var tag  in tagProductList)
+			{
+				productList.Add(tag);
+			}
+			var index = random.Next(productList.Count);
+			var product = await _repository.GetAsync(x => x.Id == productList[index].ProductId);
+			return product;
+		} 
 
-			return product[index];
+		public async Task<bool> RemoveProductAsync(ProductViewModel model)
+		{
+			var product = await _repository.DeleteAsync(x => x.Id == model.Id);
+			if (product)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+
 		}
+		public List<ProductViewModel> GetCookies()
+		{
+			var cookie = _httpContextAccessor.HttpContext!.Request.Cookies["VisitedProducts"];
+			var productlist = new List<ProductViewModel>();
+			
+			if (cookie != null)
+			{
+				var json = JsonSerializer.Deserialize<List<ProductViewModel>>(cookie);
+				foreach (var item in json!)
+				{
 
+					productlist.Add(item);
+					
+				}
+			}
+
+
+			return productlist;
+		} 
 	}
 }
