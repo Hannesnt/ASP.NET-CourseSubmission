@@ -47,6 +47,11 @@ namespace ASP.NET_Course_Submission.Controllers
 			{
 				productList.Remove(checkProduct);
 			}
+			if (productList.Count == 3)
+			{
+				productList.Remove(productList[0]);
+			}
+
 			productList.Add(product);
 
 			var Json = JsonSerializer.Serialize(productList);
@@ -54,11 +59,10 @@ namespace ASP.NET_Course_Submission.Controllers
 			CookieOptions options = new CookieOptions();
 			options.Expires = DateTimeOffset.Now.AddDays(1);
 
+
 			if (productList != null)
 			{
-
 					Response.Cookies.Append("VisitedProducts", Json, options);
-				
 			}
 
 			return View(product);

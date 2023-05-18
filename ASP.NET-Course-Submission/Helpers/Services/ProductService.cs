@@ -129,13 +129,13 @@ namespace ASP.NET_Course_Submission.Helpers.Services
 			var random = new Random();
 			string categoryName = "";
 			int category = 0;
-			var categories = await _context.Categories.ToListAsync();
+			var categories = await _categoryService.GetAllCategoriesAsync();
 			var items = new List<ProductEntity>();
 			do
 			{
 				category = random.Next(categories.Count);
 				categoryName = await _categoryService.GetCategoryName(category);
-				items = await _context.Products.OrderByDescending(p => p.Id).Include(x => x.Category).Where(x => x.Category.Id == category).ToListAsync();
+				items = await _repository.GetProductsDescending(category);
 
 			}
 			while (!items.Any());

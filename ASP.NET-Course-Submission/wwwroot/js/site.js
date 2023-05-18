@@ -22,10 +22,12 @@ const pswValidation = () => {
 
     myInput.onfocus = function () {
         document.getElementById("message").style.display = "block";
+        document.getElementById("errorPswMsg").style.display = "none";
     }
 
     myInput.onblur = function () {
         document.getElementById("message").style.display = "none";
+        document.getElementById("errorPswMsg").style.display = "none";
     }
 
 
@@ -77,15 +79,20 @@ const ConfirmPsw = () => {
 
 
     confirmInput.onblur = function () {
-        document.getElementById("confirmMessage").style.display = "none";
+        if (confirmInput.value.match(psw.value)) {
+            document.getElementById("confirmMessage").style.display = "none";
+            document.getElementById("errorConfirmMsg").style.display = "none";
+        }
     }
 
     confirmInput.onkeyup = function () {
         if (confirmInput.value.match(psw.value)) {
             document.getElementById("confirmMessage").style.display = "none";
+            document.getElementById("errorConfirmMsg").style.display = "none";
         } else {
             document.getElementById("confirmMessage").style.display = "block";
             matchMsg.innerHTML = "Password Doesnt Match";
+            document.getElementById("errorConfirmMsg").style.display = "none";
         }
     }
 }
@@ -101,12 +108,14 @@ const NameValidation = () => {
         if (firstName.value.match(regEx))
         {
             document.getElementById("firstNameMsg").style.display = "none";
+            document.getElementById("errorFirstNameMsg").style.display = "none";
         }
 
     }
     lastName.onblur = function () {
         if (lastName.value.match(regEx)) {
             document.getElementById("lastNameMsg").style.display = "none";
+            document.getElementById("errorLastnameMsg").style.display = "none";
         }
  
     }
@@ -115,22 +124,26 @@ const NameValidation = () => {
     firstName.onkeyup = function () {
         if (firstName.value.match(regEx)) {
             document.getElementById("firstNameMsg").style.display = "none";
+            document.getElementById("errorFirstNameMsg").style.display = "none";
         } else {
+            document.getElementById("errorFirstNameMsg").style.display = "none";
             document.getElementById("firstNameMsg").style.display = "inline";
             document.getElementById("firstNameMsg").style.width = "50%";
             document.getElementById("firstNameMsg").style.color = "red";
-            document.getElementById("firstNameWarning").innerHTML = "Only letters"
+            document.getElementById("firstNameWarning").innerHTML = "Only letters in first name"
         }
     }
 
     lastName.onkeyup = function () {
         if (lastName.value.match(regEx)) {
             document.getElementById("lastNameMsg").style.display = "none";
+            document.getElementById("errorLastnameMsg").style.display = "none";
         } else {
+            document.getElementById("errorLastnameMsg").style.display = "none";
             document.getElementById("lastNameMsg").style.display = "inline";
             document.getElementById("lastNameMsg").style.width = "50%";
             document.getElementById("lastNameMsg").style.color = "red";
-            document.getElementById("lastNameWarning").innerHTML = "Only letters"
+            document.getElementById("lastNameWarning").innerHTML = "Only letters in last name"
         }
     }
 }
@@ -142,15 +155,18 @@ const emailValidation = () => {
     email.onblur = function () {
         if (email.value.match(regEx)) {
             document.getElementById("emailMsg").style.display = "none";
+            document.getElementById("errorEmailMsg").style.display = "none";
         }
     }
 
     email.onkeyup = function () {
         if (email.value.match(regEx)) {
             document.getElementById("emailMsg").style.display = "none";
+            document.getElementById("errorEmailMsg").style.display = "none";
         }
         else {
             document.getElementById("emailMsg").style.display = "block";
+            document.getElementById("errorEmailMsg").style.display = "none";
             document.getElementById("emailMsg").style.color = "red";
             document.getElementById("emailWarning").innerHTML = "ingen gilltig email"
         }
@@ -164,13 +180,16 @@ const postalCodeValidation = () => {
     postCode.onblur = function () {
         if (postCode.value.match(regEx)) {
             document.getElementById("postCodeMsg").style.display = "none";
+            document.getElementById("errorPostMsg").style.display = "none";
         }
     }
     postCode.onkeyup = function () {
         if (postCode.value.match(regEx)) {
             document.getElementById("postCodeMsg").style.display = "none";
+            document.getElementById("errorPostMsg").style.display = "none";
         }
         else {
+            document.getElementById("errorPostMsg").style.display = "none";
             document.getElementById("postCodeMsg").style.display = "block";
             document.getElementById("postCodeMsg").style.color = "red";
             document.getElementById("postCodeWarning").innerHTML = "ingen gilltig postkod"
@@ -184,13 +203,16 @@ const cityValidation = () => {
     city.onblur = function () {
         if (city.value.match(regEx)) {
             document.getElementById("cityMsg").style.display = "none";
+            document.getElementById("errorCityMsg").style.display = "none";
         }
     }
     city.onkeyup = function () {
         if (city.value.match(regEx)) {
             document.getElementById("cityMsg").style.display = "none";
+            document.getElementById("errorCityMsg").style.display = "none";
         }
         else {
+            document.getElementById("errorCityMsg").style.display = "none";
             document.getElementById("cityMsg").style.display = "block";
             document.getElementById("cityMsg").style.color = "red";
             document.getElementById("cityWarning").innerHTML = "ingen gilltig stad"
@@ -257,6 +279,25 @@ const discountValidation = () => {
             document.getElementById("discountMsg").style.display = "block";
             document.getElementById("discountMsg").style.color = "red";
             document.getElementById("discountWarning").innerHTML = "Rabatt mellan 0-100"
+        }
+    }
+}
+const phoneValidation = () => {
+    const regEx = /^07[02369]\d{7}$/;
+    const phone = document.getElementById("Phone");
+
+    phone.onkeyup = function () {
+        if (phone.value.match(regEx)) {
+            document.getElementById("phoneWarning").style.display = "none";
+            document.getElementById("errorPhoneMsg").style.display = "none";
+            document.getElementById("phoneMsg").style.display = "none";
+        }
+        else {
+            document.getElementById("errorPhoneMsg").style.display = "none";
+            document.getElementById("phoneMsg").style.display = "block";
+            document.getElementById("phoneMsg").style.color = "red";
+            document.getElementById("phoneWarning").style.display = "block";
+            document.getElementById("phoneWarning").innerHTML = "Detta format: 0711111111"
         }
     }
 }

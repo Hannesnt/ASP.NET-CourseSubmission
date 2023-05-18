@@ -13,7 +13,7 @@
 				<div class="col-12 text-center">
 					<h1>Recently Viewed Products</h1>
 				</div>
-				<div class="col-12 d-flex justify-content-evenly product-cards">
+				<div class="col-12 d-flex justify-content-center product-cards">
 					@foreach (var cookie in Cookies)
 					{
 					<partial name="/Views/Partials/Cards/_ProductCard.cshtml" model="cookie" />

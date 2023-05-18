@@ -13,7 +13,7 @@ namespace ASP.NET_Course_Submission.Helpers.Services
 			_context = context;
 		}
 
-		public async Task<IEnumerable<CategoryViewModel>> GetAllCategoriesAsync()
+		public async Task<List<CategoryViewModel>> GetAllCategoriesAsync()
 		{
 			var categories = new List<CategoryViewModel>();
 			var items = await _context.Categories.ToListAsync();

@@ -9,34 +9,38 @@
                     <div class="row d-flex">
                         <p>Write something</p>
                         <hr>
-                        <div class="col-6">
-                            <label asp-for="FirstName"></label>
-                            <input asp-for="FirstName">
-                            <small><span asp-validation-for="FirstName" class="text-danger"></span></small>
-                        </div>
-                        <div class="col-6">
-                            <label asp-for="LastName"></label>
-                            <input asp-for="LastName">
-                            <small><span asp-validation-for="LastName" class="text-danger"></span></small>
-                        </div>
-                        <div id="firstNameMsg">
-                            <span id="firstNameWarning"></span>
-                        </div>
-                        <div id="lastNameMsg">
-                            <span id="lastNameWarning"></span>
-                        </div>
-                        <div class="col-6">
-                            <label asp-for="Email"></label>
-                            <input asp-for="Email">
-                            <small><span asp-validation-for="Email" class="text-danger"></span></small>
+						<div class="mb-3 col-6">
+							<label asp-for="FirstName" class="form-label"></label>
+							<input asp-for="FirstName" />
+							<small id="errorFirstNameMsg"><span asp-validation-for="FirstName" class="text-danger"></span></small>
+						</div>
+
+						<div class="mb-3 col-6">
+							<label asp-for="LastName" class="form-label"></label>
+							<input asp-for="LastName" />
+							<small id="errorLastnameMsg"><span asp-validation-for="LastName" class="text-danger"></span></small>
+						</div>
+						<div id="firstNameMsg">
+							<span id="firstNameWarning"></span>
+						</div>
+						<div id="lastNameMsg">
+							<span id="lastNameWarning"></span>
+						</div>
+                        <div class="mb-3 col-12">
+                            <label asp-for="Email" class="form-label"></label>
+                            <input asp-for="Email" />
+                            <small id="errorEmailMsg"><span asp-validation-for="Email" class="text-danger"></span></small>
                         </div>
                         <div id="emailMsg">
-							<span id="emailWarning"></span>
-						</div>
-                        <div class="col-6">
-                            <label asp-for="PhoneNumber"></label>
-                            <input asp-for="PhoneNumber">
-                            <small><span asp-validation-for="PhoneNumber" class="text-danger"></span></small>
+                            <span id="emailWarning"></span>
+                        </div>
+                        <div class="mb-3 col-6">
+                            <label asp-for="PhoneNumber" class="form-label"></label>
+                            <input asp-for="PhoneNumber" id="Phone"/>
+                            <small id="errorPhoneMsg"><span asp-validation-for="PhoneNumber" class="text-danger"></span></small>
+                        </div>
+                        <div id="phoneMsg">
+                            <span id="phoneWarning"></span>
                         </div>
                         <div class="col-12">
                             <p><label asp-for="Description"></label></p>
@@ -58,3 +62,4 @@
 <script>NameValidation()</script>
 <script>emailValidation()</script>
 <script>descriptionValidation()</script>
+<script>phoneValidation()</script>
