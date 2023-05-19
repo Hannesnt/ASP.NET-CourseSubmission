@@ -4,7 +4,6 @@
     ViewData["Title"] = Model.Name;
     var related = await _productService.GetAllAsync();
     var categoryName = await categoryService.GetAsync(Model.CategoryId);
-    int counter = 0;
 }
 
 <div class="hero">
@@ -70,21 +69,16 @@
     <hr>
 </section>
 <section class="products">
-    <div class="container">
-        <h2>Related Products</h2>
-        @foreach(var product in related)
-        {
-            if(product.Id != Model.Id && product.CategoryId == Model.CategoryId)
+        <div class="container">
+            <h2>Related Products</h2>
+            @foreach (var product in related)
             {
-                <partial name="/Views/Partials/Cards/_ProductCard.cshtml" model="product" />
+                if (product.Id != Model.Id && product.CategoryId == Model.CategoryId)
+                {
+                    <partial name="/Views/Partials/Cards/_ProductCard.cshtml" model="product" />
+                }
             }
-            counter++;
-        }
-        @if (counter == related.Count)
-        {
-            <p>Det finns inga fler produker i denna kategorin</p>
-        }
-    </div>
+        </div>
 </section>
 
 
