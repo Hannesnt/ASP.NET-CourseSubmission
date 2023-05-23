@@ -27,9 +27,9 @@ namespace ASP.NET_Course_Submission.Models.ViewModels
 		[Display(Name = "Kategori *")]
 		public int CategoryId { get; set; }
 
-		public bool OnSale { get; set; }
 
         [Required(ErrorMessage = "Du måste välja procentuell rabbat 0-100. ")]
+        [RegularExpression(@"^(?:100|\d{1,2})$", ErrorMessage = "Ingen giltig rabatt")]
         [Display(Name = "Procentuell rabatt * (0-100)")]
         public int Discount { get; set; }
 
@@ -56,7 +56,6 @@ namespace ASP.NET_Course_Submission.Models.ViewModels
 				Discount = RegisterProductViewModel.Discount,
 				CategoryId = RegisterProductViewModel.CategoryId,
 				ProductImage = RegisterProductViewModel.ProductImage,
-				OnSale = RegisterProductViewModel.OnSale,
 			};
 		}
 	}

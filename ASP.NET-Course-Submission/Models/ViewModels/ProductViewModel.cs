@@ -7,7 +7,7 @@ namespace ASP.NET_Course_Submission.Models.ViewModels
 	{
 		public int Id { get; set; }
 		public string Name { get; set; } = null!;
-		public string Description { get; set; } = null!;
+		public string? Description { get; set; }
 		public decimal Price { get; set; }
 
 		public int Discount { get; set; }
@@ -31,7 +31,6 @@ namespace ASP.NET_Course_Submission.Models.ViewModels
 				Discount = model.Discount,
 				CategoryId = model.CategoryId,
 				ProductImage = model.ProductImage,
-				OnSale = model.OnSale,
 			};
 		}
 		public static implicit operator ProductEntity(ProductViewModel model)
