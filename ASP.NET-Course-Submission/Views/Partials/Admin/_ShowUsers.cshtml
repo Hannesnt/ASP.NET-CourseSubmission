@@ -13,7 +13,7 @@
 		<form method="post">
 			<input type="hidden" asp-for="@Model.Id" />
 			<div class="col-12  d-flex flex-column justify-content-center">
-				<select asp-for="@Model.RoleName" class="form-control">
+				<select asp-for="@Model.RoleName" class="form-control roleselect">
 					<option value="">--Select a category--</option>
 					@foreach (var item in roles)
 					{

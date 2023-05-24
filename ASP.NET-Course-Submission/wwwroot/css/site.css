@@ -181,6 +181,10 @@ footer p {
   margin: 10px;
 }
 
+.roleselect {
+  cursor: pointer;
+}
+
 header {
   width: 100%;
   height: 80px;
